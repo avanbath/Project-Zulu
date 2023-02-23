@@ -3,7 +3,7 @@
 
 Team Name: Zulu
 
-Team Members: (ADD CONTRIBUTER NAMES HERE) | Avaninder Bath (avanbath@my.yorku.ca)
+Team Members: Avaninder Bath | Nikolaos Diamantakis | John Wiens-Soshycki | Luana Ribeiro Madeira
 
 ## Description
 (ADD A NICE DESCRIPTION HERE)
