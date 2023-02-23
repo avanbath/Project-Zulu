@@ -1,9 +1,10 @@
-CREATE TABLE location(
-   date     NUMBER(7,0) NOT NULL PRIMARY KEY 
-  ,location VARCHAR(51) NOT NULL
-  ,nhpi     NUMERIC(5,1)
-  ,level    INTEGER  NOT NULL
-);
+CREATE TABLE `location` (
+  `date` varchar(10) NOT NULL,
+  `location` varchar(55) NOT NULL,
+  `nhpi` double DEFAULT NULL,
+  `level` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
 INSERT INTO location(date,location,nhpi,level) VALUES (2022-12,'Alberta',122.7,1);
 INSERT INTO location(date,location,nhpi,level) VALUES (2022-11,'Alberta',122.7,1);
 INSERT INTO location(date,location,nhpi,level) VALUES (2022-10,'Alberta',123,1);
