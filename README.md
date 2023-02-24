@@ -8,7 +8,7 @@ Team Members: Avaninder Bath | Nikolaos Diamantakis | John Wiens-Soshycki | Luan
 ## How To Start The Application
 - Make sure Java and MySQL are installed
 - Download the 8.0.32 version of the MySQL Connector/J library file
-- Refer to the location of the downloaded .jar file in the classpath accordingly
+- Refer and direct the location of the downloaded .jar file to the project classpath accordingly
 - Repeat the two steps above for the Apache Commons math library file
-- Run the main Java file (in the current phase of development, it's the UserInterface.java file that does this)
+- Run the main Java file (in the current phase of development, the UserInterface.java file does this)
 - Enjoy!
