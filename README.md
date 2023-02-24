@@ -5,11 +5,10 @@ Team Name: Zulu
 
 Team Members: Avaninder Bath | Nikolaos Diamantakis | John Wiens-Soshycki | Luana Ribeiro Madeira
 
-## Description
-(ADD A NICE DESCRIPTION HERE)
-
-## Functional Requirements
-- (SEE WHAT TO PUT HERE, IF THIS SECTION IS GOOD TO HAVE HERE)
-
 ## How To Start The Application
-(WE CAN EXPLAIN THE SETUP AND RUNNING INSTRUCTIONS HERE)
+- Make sure Java and MySQL are installed
+- Download the 8.0.32 version of the MySQL Connector/J library file
+- Refer to the location of the downloaded .jar file in the classpath accordingly
+- Repeat the two steps above for the Apache Commons math library file
+- Run the main Java file (in the current phase of development, it's the UserInterface.java file that does this)
+- Enjoy!
