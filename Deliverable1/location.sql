@@ -1,3 +1,6 @@
+CREATE DATABASE NHPIDatabase;
+use NHPIDatabase;
+
 CREATE TABLE `location` (
   `date` varchar(10) NOT NULL,
   `location` varchar(55) NOT NULL,

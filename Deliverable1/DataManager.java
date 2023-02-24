@@ -5,8 +5,8 @@ public class DataManager {
 		try{  
 		Class.forName("com.mysql.jdbc.Driver");  
 		Connection con=DriverManager.getConnection(  
-		"jdbc:mysql://localhost:3306/location","root","Luanamade!");  
-		//here sonoo is database name, root is username and password  
+		"jdbc:mysql://localhost:3306/NHPIDatabase","root","root");  
+		
 		Statement stmt=con.createStatement();  
 		ResultSet rs=stmt.executeQuery("select * from location");  
 		while(rs.next())  
