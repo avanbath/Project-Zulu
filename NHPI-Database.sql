@@ -1,4 +1,4 @@
-CREATE TABLE location(
+CREATE TABLE location (
   date DATE NOT NULL PRIMARY KEY, 
   month INTEGER NOT NULL, 
   year INTEGER  NOT NULL, 
