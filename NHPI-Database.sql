@@ -1,10 +1,11 @@
-CREATE TABLE location(
-   month    INTEGER  NOT NULL
+CREATE TABLE location (
+  month    INTEGER  NOT NULL
   ,year     INTEGER  NOT NULL
   ,location VARCHAR(51) NOT NULL
   ,nhpi     NUMERIC(5,1)
   ,level    INTEGER  NOT NULL
 );
+
 INSERT INTO location(month,year,location,nhpi,level) VALUES (12,2022,'Alberta',122.7,1);
 INSERT INTO location(month,year,location,nhpi,level) VALUES (12,2022,'Alberta',122.7,1);
 INSERT INTO location(month,year,location,nhpi,level) VALUES (12,2022,'Alberta',123,1);
