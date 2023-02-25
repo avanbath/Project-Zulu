@@ -18,7 +18,7 @@ public class LineGraph extends ApplicationFrame {
     
     private DefaultCategoryDataset createDataset(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        DataManager.fillDataSet(dataset, "Alberta");
+        AltDataManager.fillDataSet(dataset, "Alberta");
         return dataset;
     }
 
