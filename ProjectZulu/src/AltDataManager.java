@@ -11,9 +11,9 @@ public class DataManager {
 			PreparedStatement statement = connection.prepareStatement("SELECT * from location WHERE location = ?");
             statement.setString(1, location);
             
-            System.out.println("Before sql statement");
+          
             ResultSet AllNovaScotiaData = statement.executeQuery();
-            System.out.println("After sql statement");
+           
 
 			while(AllNovaScotiaData.next()) {
                 System.out.println("Looping");
