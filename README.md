@@ -14,7 +14,7 @@ the LineGraph and database can generate a graph for a given location. UI can loa
 
 ## How To Start The Application
 - Make sure Java and MySQL are installed
-- Run the main Java file (in the current phase of development, the UserInterface.java file does this)
+- Run each Java file to view how it runs (in the current phase of development, the UserInterface.java file is for the UI)
 - To run on eclipse you must import JCommon, JFreeChart, mysql-connector, and Apache Math Commons
 - Path for JFreeChart, mysqlconnector and Apache Commons Math Library must exist in the java project settings.json file (settings.json/pom.xml/imported) in order to run on vscode.
 - Enjoy!
