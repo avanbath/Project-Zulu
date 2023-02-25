@@ -1,108 +1,72 @@
 import javax.swing.*;
-
-public class UserInterface {
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
-
-
-        JButton mlForecast = new JButton("ML Forecast");
-        JButton statTest = new JButton("Statistical Test");
-        JButton compareNHPI = new JButton("Compare NHPI");
-
-        //mlForecast.addActionListener();
-        //statTest.addActionListener();
-        //compareNHPI.addActionListener();
-        
-        frame.add(panel);
-
-        frame.setSize(500, 500);
-        frame.setLayout(null);
-        frame.setVisible(true);
-    }
-}
-
-/* THE FOLLOWING SECTION IS TO BE EDITED AND UPDATED ACCORDINGLY. PLEASE REFER TO THIS PORTION OF CODE TO IMPLEMENT THE UI:
-
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
 
-public class MyPanel extends JPanel {
-    private JButton jcomp1;
-    private JButton jcomp2;
-    private JTextField jcomp3;
-    private JTextField jcomp4;
-    private JLabel jcomp5;
-    private JLabel jcomp6;
-    private JTextField jcomp7;
-    private JTextField jcomp8;
-    private JLabel jcomp9;
-    private JLabel jcomp10;
-    private JLabel jcomp11;
-    private JLabel jcomp12;
-    private JLabel jcomp13;
-
-    public MyPanel() {
-        //construct components
-        jcomp1 = new JButton ("Proceed to Visualizations");
-        jcomp2 = new JButton ("Add time-series");
-        jcomp3 = new JTextField (5);
-        jcomp4 = new JTextField (5);
-        jcomp5 = new JLabel ("Province/Town 1:");
-        jcomp6 = new JLabel ("Proivnce/Town 2:");
-        jcomp7 = new JTextField (5);
-        jcomp8 = new JTextField (5);
-        jcomp9 = new JLabel ("Date 1:");
-        jcomp10 = new JLabel ("Date 2:");
-        jcomp11 = new JLabel ("National Housing Price Index Comparison");
-        jcomp12 = new JLabel (""Where should I live in Canada?"");
-        jcomp13 = new JLabel ("Please enter the two Canadian provinces/towns and two dates to compare their NHPIs:");
-
-        //adjust size and set layout
-        setPreferredSize (new Dimension (670, 430));
-        setLayout (null);
-
-        //add components
-        add (jcomp1);
-        add (jcomp2);
-        add (jcomp3);
-        add (jcomp4);
-        add (jcomp5);
-        add (jcomp6);
-        add (jcomp7);
-        add (jcomp8);
-        add (jcomp9);
-        add (jcomp10);
-        add (jcomp11);
-        add (jcomp12);
-        add (jcomp13);
-
-        //set component bounds (only needed by Absolute Positioning)
-        jcomp1.setBounds (415, 320, 180, 35);
-        jcomp2.setBounds (270, 335, 140, 20);
-        jcomp3.setBounds (265, 220, 165, 25);
-        jcomp4.setBounds (265, 260, 165, 25);
-        jcomp5.setBounds (155, 220, 100, 25);
-        jcomp6.setBounds (155, 260, 100, 25);
-        jcomp7.setBounds (495, 220, 100, 25);
-        jcomp8.setBounds (495, 260, 100, 25);
-        jcomp9.setBounds (450, 220, 45, 25);
-        jcomp10.setBounds (450, 260, 45, 25);
-        jcomp11.setBounds (20, 15, 255, 25);
-        jcomp12.setBounds (20, 40, 190, 25);
-        jcomp13.setBounds (105, 175, 495, 25);
+public class UserInterface extends JFrame implements ActionListener {
+	// Text fields for user inputs
+    private JTextField monthField1, monthField2, yearField1, yearField2, regionField1, regionField2;
+    // Submit button
+    private JButton submitButton;
+    
+    public static void main(String[] args) {
+        // Create an instance of the form
+        UserInterface UserInterface = new UserInterface();
     }
+    
+    public UserInterface() {
+        // Set up the form
+        setTitle("Project Zulu - NHPI Comparer");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(4, 2));
+        
+        // Initialize the text fields
+        monthField1 = new JTextField();
+        monthField2 = new JTextField();
+        yearField1 = new JTextField();
+        yearField2 = new JTextField();
+        regionField1 = new JTextField();
+        regionField2 = new JTextField();
+        
+        // Initialize the submit button
+        submitButton = new JButton("Submit");
+        submitButton.addActionListener(this);
+        
+        // Add the form components to the frame
+        add(new JLabel("Start Month:", JLabel.CENTER));
+        add(monthField1);
+        add(new JLabel("End Month:", JLabel.CENTER));
+        add(monthField2);
+        add(new JLabel("Start Year:", JLabel.CENTER));
+        add(yearField1);
+        add(new JLabel("End Year:", JLabel.CENTER));
+        add(yearField2);
+        add(new JLabel("Region 1:", JLabel.CENTER));
+        add(regionField1);
+        add(new JLabel("Region 2:", JLabel.CENTER));
+        add(regionField2);
+        add(submitButton);
+        
+        // Show the form
+        setVisible(true);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == submitButton) {
+            // Get the user inputs and store them in variables
+            String month1 = monthField1.getText();
+            String month2 = monthField2.getText();
+            int year1 = Integer.parseInt(yearField1.getText());
+            int year2 = Integer.parseInt(yearField2.getText());
+            String region1 = regionField1.getText();
+            String region2 = regionField2.getText();
 
+            // Pass the user inputs to the database Java file to query results and send them to the visualizations creator
+            // ...
 
-    public static void main (String[] args) {
-        JFrame frame = new JFrame ("MyPanel");
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add (new MyPanel());
-        frame.pack();
-        frame.setVisible (true);
+            // Display a confirmation message
+            JOptionPane.showMessageDialog(this, "Data submitted to server.");
+        }
     }
 }
-
- */

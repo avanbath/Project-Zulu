@@ -1,6 +1,30 @@
 import java.sql.*;
+import org.jfree.chart.*;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class DataManager {
+    public static void fillDataSet(DefaultCategoryDataset dataset, String location){
+        try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://sql9.freesqldatabase.com:3306/sql9600659","sql9600659","7ypun97xyb");
+
+			PreparedStatement statement = connection.prepareStatement("SELECT * from location WHERE location = ?");
+            statement.setString(1, location); 
+          
+            ResultSet AllData = statement.executeQuery();
+
+			while(AllData.next()) {
+                System.out.println("Looping");
+                dataset.addValue(AllData.getInt(4), "NHPI", AllData.getString(2));
+            }
+
+			connection.close();
+		}
+
+		catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+    
     public static void main(String args[]){
 		try {
 			Connection connection = DriverManager.getConnection("jdbc:mysql://sql9.freesqldatabase.com:3306/sql9600659","sql9600659","7ypun97xyb");
