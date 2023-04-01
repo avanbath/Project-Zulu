@@ -3,6 +3,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class UserInterface extends JFrame implements ActionListener {
+	String provinces[] = {"Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Nova Scotia", "Ontario", "Quebec", "Prince Edward Island", "Saskatchewan"};
+    	 String cities[] = {"Calgary, Alberta", "Charlottetown, Prince Edward Island", "Edmonton, Alberta", "Greater Sudbury, Ontario","Guelph, Ontario", "Halifax, Nova Scotia", "Hamilton, Ontario", 
+       		"Kelowna, British Columbia", "Kitchener-Cambridge-Waterloo, Ontario", "London, Ontario","Montreal, Quebec","Oshawa, Ontario","Ottawa, Ontario","Quebec, Quebec","Regina, Saskatchewan",
+       		"Saint John, Fredericton, and Moncton, New Brunswick","Saskatoon, Saskatchewan","Sherbrooke, Quebec","St. Catharines-Niagara, Ontario","St. John's, Newfoundland and Labrador","Toronto, Ontario",
+       		"Trois-Rivieres, Quebec","Vancouver, British Columbia","Victoria, British Columbia","Windsor, Ontario","Winnipeg, Manitoba"
+       		};
+	DataManager db = new DataManager();
+	statTest test = new statTest();
 	// Text fields for user inputs
     private JTextField monthField1, monthField2, yearField1, yearField2, regionField1, regionField2;
     // Submit button
