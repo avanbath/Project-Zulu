@@ -8,15 +8,19 @@ import java.util.ArrayList;
 public class NHPIDataTable implements DataTable {
 	//fields
 	String location;
-	String startDate;
-	String endDate;
+	int startYear;
+	int endYear;
+	int startMonth;
+	int endMonth;
 	List<Integer> table;
 	
 	//constructor
-	public NHPIDataTable(String l, String s, String e) {
+	public NHPIDataTable(String l, int sY, int eY, int sM, int eM) {
 		this.location = l;
-		this.startDate = s;
-		this.endDate = e;
+		this.startYear = sY;
+		this.endYear = eY;
+		this.startMonth = sM;
+		this.endMonth = eM;
 		this.table = new ArrayList<Integer>();
 	}
 	
@@ -27,15 +31,15 @@ public class NHPIDataTable implements DataTable {
 	}
 
 	@Override
-	public String getStart() {
-		return this.startDate;
+	public int getStartYear() {
+		return this.startYear;
 	}
 
 	@Override
-	public String getEnd() {
-		return this.endDate;
+	public int getEndYear() {
+		return this.endYear;
 	}
-
+	
 	@Override
 	public void addValue(int i) {
 		//add exception if table does not exist
@@ -45,6 +49,18 @@ public class NHPIDataTable implements DataTable {
 	@Override
 	public List<Integer> getTable() {
 		return this.table;
+	}
+
+	@Override
+	public int getStartMonth() {
+		// TODO Auto-generated method stub
+		return this.startMonth;
+	}
+
+	@Override
+	public int getEndMonth() {
+		// TODO Auto-generated method stub
+		return this.endMonth;
 	}
 
 }
