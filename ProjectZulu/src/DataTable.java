@@ -4,8 +4,10 @@ import java.util.List;
 
 public interface DataTable {
 	String getLocation();
-	String getStart();
-	String getEnd();
+	int getStartYear();
+	int getEndYear();
+	int getStartMonth();
+	int getEndMonth();
 	List<Integer> getTable();
 	void addValue(int i);	
 }
