@@ -12,7 +12,7 @@ public class NHPIDataTable implements DataTable {
 	int endYear;
 	int startMonth;
 	int endMonth;
-	List<Integer> table;
+	List<Double> table;
 	
 	//constructor
 	public NHPIDataTable(String l, int sY, int eY, int sM, int eM) {
@@ -21,7 +21,7 @@ public class NHPIDataTable implements DataTable {
 		this.endYear = eY;
 		this.startMonth = sM;
 		this.endMonth = eM;
-		this.table = new ArrayList<Integer>();
+		this.table = new ArrayList<Double>();
 	}
 	
 	//setters and getters
@@ -41,13 +41,13 @@ public class NHPIDataTable implements DataTable {
 	}
 	
 	@Override
-	public void addValue(int i) {
+	public void addValue(double i) {
 		//add exception if table does not exist
 		this.table.add(i);
 	}
 
 	@Override
-	public List<Integer> getTable() {
+	public List<Double> getTable() {
 		return this.table;
 	}
 
