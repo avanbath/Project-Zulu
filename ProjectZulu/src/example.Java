@@ -79,7 +79,7 @@ public class DatabaseAdapter implements Adapter{
         	d.addValue(0);
         	
         }
-        
+        return d;
 		
 		
 	}
