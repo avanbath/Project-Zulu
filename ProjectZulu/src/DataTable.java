@@ -8,6 +8,6 @@ public interface DataTable {
 	int getEndYear();
 	int getStartMonth();
 	int getEndMonth();
-	List<Integer> getTable();
-	void addValue(int i);	
+	List<Double> getTable();
+	void addValue(double i);	
 }
