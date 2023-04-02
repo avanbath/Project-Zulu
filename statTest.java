@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class statTest implements Operation {
 	
 	List<DataTable> l;
-	
+
 	public void provideTables(List<DataTable> t) {
 		this.l = t;
 	}
@@ -36,7 +36,6 @@ public class statTest implements Operation {
 	
 	//Method for computing the T-test
 	public String execute() throws Exception {
-		
 		if(l.size()!= 2) {
 			throw new Exception("2 Lists must be provided only.");
 			}
@@ -66,10 +65,8 @@ public class statTest implements Operation {
 		return result;
 	}
 
-
 	/* testing with main method
 	public static void main(String[] args){
-		
         double[] sample1 = { 1  , 2  , 3   ,4 , 3, 5, 6.1, 3.4, 2.9};
         double[] sample2 = {  1  , 2  , 3   ,4 , 3, 5, 6.1, 3.4, 2.9};
         String result = "default";
@@ -98,10 +95,7 @@ public class statTest implements Operation {
   	    	result = "the t-score is " + String.format("%.2f", t_statistic) + " and its abs value is lower than critical value with a=0.05 of " + String.format("%.2f", critvalue)  + " so the difference is insignificant";
   	    }
         
-        System.out.println(result);
-        
+        System.out.println(result);    
 	}
 	*/
-	
-	
 }
