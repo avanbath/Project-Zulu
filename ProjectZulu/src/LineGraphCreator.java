@@ -1,30 +1,32 @@
+package my.custom.area;
+
 import java.util.List;
-import java.util.Iterator;
+
 import org.jfree.chart.*;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import java.util.Iterator;
 import org.jfree.data.xy.*;
-//import org.jfree.data.xy.XYDataset;
-//import org.jfree.data.xy.XYSeriesCollection;
-//import org.jfree.ui.ApplicationFrame;
+
 
 public class LineGraphCreator implements GraphCreator {
+	
+	
 	public LineGraphCreator(){
     }
-	
+	/*
 	private DefaultCategoryDataset createDataset(List<Double> t, int startDate){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         Integer y = startDate;
         Iterator<Double> i = t.iterator();
-        
         while (i.hasNext()) {
         	dataset.addValue((Double) i.next(), "NHPI", y.toString());
         	y++;
         }
-        
         return dataset;
     }
+    */
 
 	private XYDataset createDataset(List<DataTable> l) {
 		//creating the XY series object
@@ -41,35 +43,31 @@ public class LineGraphCreator implements GraphCreator {
 			//create a new series which will be added to the collection
 			XYSeries series = new XYSeries(dataTable.getLocation());
 			int count = 0;
-			
 			while (doubleIterator.hasNext()) {
 				series.add(dataTable.getStartYear() + count ,doubleIterator.next());
 				count++;
 			}
-			
 			dSet.addSeries(series);
 		}
+		
 		return dSet;
 	}
 	
+	/*
 	@Override
 	public ChartPanel create(List<Double> t, int d1, String location) {
 		// TODO Auto-generated method stub
 		//LineGraph l = new LineGraph("NHPIapp");
         JFreeChart lChart = ChartFactory.createLineChart(location, "Years", "NHPI", createDataset(t, d1), PlotOrientation.VERTICAL, true, true, false);
-        ChartPanel chartPanel = new ChartPanel(lChart);
+        ChartPanel chartPanel = new ChartPanel( lChart );
         chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
-        
         return chartPanel;
 	}
-	
+	*/
 	public ChartPanel create(List<DataTable> t) {
-		// TODO Auto-generated method stub
-		//LineGraph l = new LineGraph("NHPIapp");
-        JFreeChart lChart = ChartFactory.createXYLineChart("filler", "Years", "NHPI", createDataset(t), PlotOrientation.VERTICAL, true, true, false);
-        ChartPanel chartPanel = new ChartPanel(lChart);
+        JFreeChart lChart = ChartFactory.createXYLineChart(title, "Years", "NHPI", createDataset(t), PlotOrientation.VERTICAL, true, true, false);
+        ChartPanel chartPanel = new ChartPanel( lChart );
         chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
-        
         return chartPanel;
 	}
 
