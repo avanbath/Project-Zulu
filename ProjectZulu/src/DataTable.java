@@ -1,3 +1,5 @@
+package my.custom.area;
+
 import java.util.List;
 
 public interface DataTable {
@@ -8,4 +10,5 @@ public interface DataTable {
 	int getEndMonth();
 	List<Double> getTable();
 	void addValue(double i);	
+	boolean checkSameSeries(DataTable d);
 }
