@@ -8,6 +8,8 @@ import java.awt.event.*;
 public class UserInterface extends JFrame implements ActionListener {
 	DatabaseAdapter db = new DatabaseAdapter();
 	
+	private String[] regions, cities;
+	
 	private JFrame frame1;
 	private JLabel title, introLabel, monthLabel1, monthLabel2, yearLabel1, yearLabel2, regionLabel1, regionLabel2;
     private JTextField monthField1, monthField2, yearField1, yearField2, regionField1, regionField2;
@@ -181,7 +183,7 @@ public class UserInterface extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submitButton) {
-        	// Get the user inputs and store them in variables
+        	// Get the user inputs and store them in variables, & show the next window
         	for (int i = 0; i < regionsArray.length; i++) {
         		String startMonth = monthField1.getText();
         		String endMonth = monthField2.getText();
@@ -201,6 +203,50 @@ public class UserInterface extends JFrame implements ActionListener {
                     ResultSet resultSetS2AnyRegion = db.callDB(startMonth, endMonth, startYear, endYear, region);
                 }
         	}
+        	
+        	frame1.dispose();
+        	
+        	JFrame frame2 = new JFrame();
+        	JLabel selectLabel = new JLabel();
+        	JPanel operPanel = new JPanel();
+        	JButton mlButton = new JButton();
+        	JButton tButton = new JButton();
+        	JButton nhpiButton = new JButton();
+        	
+        	frame2.setTitle("Project Zulu - NHPI Comparison & Forecasting");
+        	frame2.setResizable(false);
+            frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame2.setLayout(new FlowLayout());
+            frame2.setSize(500, 400);
+            frame2.setLocationRelativeTo(null);
+            
+            selectLabel.setText("Select the operation that would you like to perform: ");
+            selectLabel.setFont(selectLabel.getFont().deriveFont(14f));
+            selectLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            
+            operPanel.setLayout(new FlowLayout());
+            operPanel.setPreferredSize(new Dimension(250, 90));
+            
+            mlButton.setText("Generate Forecast Graph");
+            mlButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            mlButton.setPreferredSize(new Dimension(250, 25));
+            mlButton.addActionListener(this);
+            operPanel.add(mlButton);
+            
+            tButton.setText("Show Statistical T-Test");
+            tButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            tButton.setPreferredSize(new Dimension(250, 25));
+            tButton.addActionListener(this);
+            operPanel.add(tButton);
+            
+            nhpiButton.setText("Compare NHPIs");
+            nhpiButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            nhpiButton.setPreferredSize(new Dimension(250, 25));
+            nhpiButton.addActionListener(this);
+            operPanel.add(nhpiButton);
+            
+            frame2.add(operPanel);
+            frame2.setVisible(true);
         }
         
         else if (e.getSource() == regionButton) {
