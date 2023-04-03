@@ -1,34 +1,63 @@
 import java.util.List;
 import java.util.ArrayList;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class OperationFacade implements OpFacadeInter{
-	List<DataTable> l;
-	TableManager t;
+
+	Operation o;
+	
 	
 	@Override
-	public void addRegion(String location, String date1, String date2) {
-		// TODO Auto-generated method stub
+	public void setStatTest() {
+		this.o = new StatTest();
 	}
 
 	@Override
-	public void resetDataTables() {
+	public void setCompareNHPI() {
 		// TODO Auto-generated method stub
-		this.l = new ArrayList<DataTable>();
+		this.o = new CompareNHPI();
 	}
 
 	@Override
-	public void setTableManager(TableManager t) {
+	public void setMLForecast() {
 		// TODO Auto-generated method stub
+		this.o = new MLForecast();
 	}
 
 	@Override
-	public String LaunchStatTest() {
-		Operation sTest = new StatTest();
-		sTest.provideTables(this.l);
-		// this will provide all tables, even those with different time series
-		// however we can have logic class in controller contact the stat test
-		// to launch seperate instances and provide the time series in isolation
-		// if necessary
-		return null;
-	}	
+	public List<String> launchOperation(List<DataTable> l) throws Exception {
+		// TODO Auto-generated method stub
+	
+		List<String> results = new ArrayList<String>();
+		Iterator<DataTable> i = l.iterator();
+		List<DataTable> sameSeries = new ArrayList<DataTable>();
+		sameSeries.add((DataTable) i.next());
+		while (i.hasNext()) {
+			DataTable current = (DataTable) i.next();
+			if (sameSeries.get(sameSeries.size()-1).checkSameSeries(current)){
+				sameSeries.add(current);
+			}
+			else {
+				this.o.provideTables(sameSeries);
+				results.add(this.o.execute());
+				this.o.clearTables();
+				sameSeries = new ArrayList<DataTable>();
+				sameSeries.add(current);
+			}
+		}
+		this.o.provideTables(sameSeries);
+		results.add(this.o.execute());
+		this.o.clearTables();
+		
+		
+		return results;
+		
+	}
+
+	
+	
+
 }
