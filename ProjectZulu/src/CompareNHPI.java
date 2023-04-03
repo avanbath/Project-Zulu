@@ -2,12 +2,15 @@ import org.apache.commons.math3.stat.descriptive.*;
 import org.apache.commons.math3.stat.StatUtils;
 import java.util.List;
 import java.util.Iterator;
-
 public class CompareNHPI implements Operation{
 	List<DataTable> l;
 	
 	public void provideTables(List<DataTable> t) {
 		this.l = t;
+	}
+	//clear tables
+	public void clearTables() {
+		this.l=null;
 	}
 	
 	public  double[] fromListToArray(List<Double> l) {
@@ -56,28 +59,6 @@ public class CompareNHPI implements Operation{
 		
 		return result;
 	}
-
-	/*
-	public static void main(String[] args){
-		//check how many lists of NHPI's have been provided and create that amount of samples
-				double []sample = {1,2,4,4};
-				
-				double mean,stdDev,max,min,variance;
-				//get information for every list provided
-				
-					
-					mean = StatUtils.mean(sample);
-					max = StatUtils.max(sample);
-					min = StatUtils.min(sample);
-					variance = StatUtils.variance(sample);
-					
-					DescriptiveStatistics stats = new DescriptiveStatistics(sample);
-					stdDev = stats.getStandardDeviation();
-					
-					System.out.println("Sample #1"+") min, max, mean & variance are: "+ min +", " + max + ", "+ String.format("%.2f", mean)+", " + String.format("%.2f", variance) + "\n" + "Standard Deviation: " + String.format("%.2f", stdDev));
-				
-	}
-	*/
 	
 	
 }
