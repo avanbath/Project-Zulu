@@ -1,7 +1,6 @@
 public interface OpFacadeInter {
-	void addRegion(String location, String date1, String date2);
-	void addTimeSeries(String date1, String date2);
-	void resetDataTables();
-	void setTableManager(TableManager t);
-	String LaunchStatTest();
+	void setStatTest();
+	void setCompareNHPI();
+	void setMLForecast();
+	List<String> launchOperation(List<DataTable> l) throws Exception;
 }
