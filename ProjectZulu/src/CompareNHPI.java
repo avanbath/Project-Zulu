@@ -2,6 +2,7 @@ import org.apache.commons.math3.stat.descriptive.*;
 import org.apache.commons.math3.stat.StatUtils;
 import java.util.List;
 import java.util.Iterator;
+
 public class CompareNHPI implements Operation{
 	List<DataTable> l;
 	
