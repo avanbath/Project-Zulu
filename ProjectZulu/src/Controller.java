@@ -1,5 +1,3 @@
-package my.custom.area;
-
 public interface Controller {
 	void addRegion(String location);
 	void addTimeSeries(String date1, String date2);
