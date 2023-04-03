@@ -1,5 +1,8 @@
+package my.custom.area;
+
 import java.util.List;
 import java.util.ArrayList;
+
 
 //no exceptions handled in current version 1.0
 public class NHPIDataTable implements DataTable {
@@ -59,4 +62,13 @@ public class NHPIDataTable implements DataTable {
 		// TODO Auto-generated method stub
 		return this.endMonth;
 	}
+
+	@Override
+	public boolean checkSameSeries(DataTable d) {
+		if (this.startYear == d.getStartYear() && this.endYear == d.getEndYear() && this.startMonth == d.getStartMonth() && this.endMonth == d.getEndMonth()) {
+			return true;
+		}
+		return false;
+	}
+
 }
