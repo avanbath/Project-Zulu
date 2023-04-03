@@ -8,5 +8,5 @@ public interface Controller {
 	void setStatTest();
 	void setCompareNHPI();
 	void setMLForecast();
-	String execute();
+	List<String> execute();
 }
