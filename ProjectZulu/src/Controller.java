@@ -1,8 +1,7 @@
 public interface Controller {
 	void addRegion(String location);
 	void addTimeSeries(String date1, String date2);
-	void resetDataTables();
-	void resetTimeSeries();
+	void reset();
 	void setStatTest();
 	void setCompareNHPI();
 	void setMLForecast();
