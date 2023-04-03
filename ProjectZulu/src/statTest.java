@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Iterator;
 
 public class statTest implements Operation {
-	
 	List<DataTable> l;
 
 	public void provideTables(List<DataTable> t) {
@@ -13,26 +12,29 @@ public class statTest implements Operation {
 	}
 	
 	public  double[] fromListToArray(List<Double> l) {
-		//iterator class 
-		
+		//iterator class
 		//count elements
 		Iterator<Double> i = l.iterator();
 		int c = 0;
+		
 		while(i.hasNext()) {
 			c++;
 		}
+		
 		//put elements in array
 		double[] a = new double[c];
+		
 		c = 0;
 		i = l.iterator();
 		a[c] = i.next();
+		
 		while (i.hasNext()) {
 			a[c] = i.next();
 			c++;
 		}
+		
 		return a;
 	}
-	
 	
 	//Method for computing the T-test
 	public String execute() throws Exception {

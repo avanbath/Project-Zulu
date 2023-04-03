@@ -1,5 +1,3 @@
-package my.custom.area;
-
 public interface OpFacadeInter {
 	void addRegion(String location, String date1, String date2);
 	void addTimeSeries(String date1, String date2);

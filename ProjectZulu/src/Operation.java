@@ -1,5 +1,3 @@
-package my.custom.area;
-
 import java.util.List;
 
 public interface Operation {

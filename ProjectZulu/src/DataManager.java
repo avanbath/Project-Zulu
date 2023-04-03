@@ -17,11 +17,14 @@ public class DataManager {
             statement.setString(8, endMonth);
             ResultSet resultSet = statement.executeQuery();
             
-//            connection.close();
+            // connection.close();
             return resultSet;
-        } catch (Exception ex) {
-            System.out.println(ex);
         }
+    	
+    	catch (Exception ex) {
+    		System.out.println(ex);
+        }
+    	
 		return null;
     }
 }
