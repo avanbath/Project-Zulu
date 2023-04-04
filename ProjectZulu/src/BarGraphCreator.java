@@ -1,22 +1,20 @@
 package my.custom.area;
 
+import java.awt.Dimension;
+import java.util.Iterator;
 import java.util.List;
 
-import org.jfree.chart.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.category.SlidingCategoryDataset;
+import org.jfree.data.xy.IntervalXYDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
-import java.util.Iterator;
-import org.jfree.data.xy.*;
-
-
-public class LineGraphCreator implements GraphCreator {
-	
-	
-	public LineGraphCreator(){
+public class BarGraphCreator implements GraphCreator{
+	public BarGraphCreator(){
     }
 	
 
@@ -47,19 +45,15 @@ public class LineGraphCreator implements GraphCreator {
 	
 	
 	public ChartPanel create(List<DataTable> t) {
+		int difference = t.get(0).getEndYear() - t.get(0).getStartYear();
+		System.out.println("Size is " + difference);
 		String title = "NHPI for " + t.get(0).getStartYear() + "-" + t.get(0).getEndYear();
-		JFreeChart lChart = ChartFactory.createXYLineChart(title, "Years", "NHPI", createDataset(t), PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart bChart = ChartFactory.createXYBarChart(title, "Years", false, "NHPI", (IntervalXYDataset) createDataset(t));
         //JFreeChart lChart = ChartFactory.createXYLineChart(title, "Years", "NHPI", createDataset(t), PlotOrientation.VERTICAL, true, true, false);
-        ChartPanel chartPanel = new ChartPanel( lChart );
-        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+        ChartPanel chartPanel = new ChartPanel( bChart );
+       
+        //chartPanel.setPreferredSize(new java.awt.Dimension(10 * (difference), 367));
+        chartPanel.setSize(new Dimension(15 * difference, 367));
         return chartPanel;
 	}
-
-	//return chartpanel to visual updater that then sends to the ui
-	
-	
-	
-	
-	
-
 }
