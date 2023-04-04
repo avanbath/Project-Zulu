@@ -1,5 +1,5 @@
 public interface NHPIPublisher {
-	public void unSubscribe(); 
-	public void notifySubscribers();
-	public void addSubscriber();
+	void addSubscriber(TableManagerSubscriber t);
+	void unSubscribe(TableManagerSubscriber t);
+	void notifySubscribers();
 }
