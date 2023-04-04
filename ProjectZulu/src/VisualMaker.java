@@ -1,3 +1,5 @@
+
+
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -50,13 +52,15 @@ public class VisualMaker implements TableManagerSubscriber, FactoryCommunicator 
 		Iterator<DataTable> i = l.iterator();
 		List<DataTable> sameSeries = new ArrayList<DataTable>();
 		sameSeries.add((DataTable) i.next());
-		
+		System.out.println(sameSeries.get(0).getLocation());
 		while (i.hasNext()) {
 			DataTable current = (DataTable) i.next();
 			if (sameSeries.get(sameSeries.size()-1).checkSameSeries(current)){
 				sameSeries.add(current);
+				System.out.println("Getting a table of the " + current.getLocation() + " series.");
 			}
 			else {
+				System.out.println("Requesting chart panel for " + sameSeries.get(0).getLocation());
 				ChartPanel chart = this.creator.create(sameSeries);
 				panel.add(chart);
 				sameSeries = new ArrayList<DataTable>();
@@ -64,9 +68,11 @@ public class VisualMaker implements TableManagerSubscriber, FactoryCommunicator 
 				counter++;
 			}
 		}
-		ChartPanel chart = this.creator.create(sameSeries);
-		panel.add(chart);
-		
+		//System.out.println("Creating another a final chart");
+		//ChartPanel chart = this.creator.create(sameSeries);
+		//System.out.println("Finished the final chart");
+		//panel.add(chart);
+		counter++;
 		frame.getContentPane().add(scrollBar);
         frame.setLayout(new GridLayout(1,counter));
         frame.setVisible(true);

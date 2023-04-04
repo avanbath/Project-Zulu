@@ -74,7 +74,9 @@ public class TableManager implements NHPIPublisher, TableRetriever {
 		// TODO Auto-generated method stub
 		for (int x=0; x<this.dates.size()/2; x=x+2) {
 			for (int y=0; y<this.locations.size(); y++) {
-				this.listOfTables.add(this.requestDataTable(this.locations.get(y), this.dates.get(x), this.dates.get(x+1)));
+				//System.out.println("Trying to get a table for " + this.locations.get(y) + " " + this.dates.get(x) + " " + this.dates.get(x+1));
+				this.listOfTables.add(this.requestDataTable(this.dates.get(x), this.dates.get(x+1), this.locations.get(y)));
+				System.out.println("Trying to get a table for " + this.locations.get(y) + " " + this.dates.get(x) + " " + this.dates.get(x+1));
 			}
 		}
 		this.notifySubscribers();
