@@ -5,16 +5,13 @@ Team Name: Zulu
 
 Team Members: Avaninder Bath | Nikolaos Diamantakis | John Wiens-Soshycki | Luana Ribeiro Madeira
 
-## Note 
-All implemented parts of the application work separetly but may not work together.  For example
-the LineGraph and database can generate a graph for a given location. UI can load but has no real functionality
-(can save user input and variables).  Database can load and take queries. Everything can work seperately.
-
-
+## Version 2.0 Notes
+- JFreeChart, mysql-connector, and Apache Math Commons libraries are already imported and ready to use, so there should be no need to import them manually
+- All implemented parts of the application now work together, as part of the requirements for this application
 
 ## How To Start The Application
-- Make sure Java and MySQL are installed
-- Run each Java file to view how it runs (in the current phase of development, the UserInterface.java file is for the UI)
-- To run on eclipse you must import JCommon, JFreeChart, mysql-connector, and Apache Math Commons
-- Path for JFreeChart, mysqlconnector and Apache Commons Math Library must exist in the java project settings.json file (settings.json/pom.xml/imported) in order to run on vscode.
+- Install Java 19 (JDK19/Java SE 19) and MySQL/MySQL Server
+- During the installation of MySQL Server, set up your Workbench to have the username "root" and the password "root" for access to the database
+- Create a schema called "database" in MySQL Workbench, and open/run the NHPI-Database.sql file to complete setup of the database for this program
+- Run UserInterface.java - this is the main file of the program
 - Enjoy!
