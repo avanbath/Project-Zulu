@@ -7,11 +7,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class UserInterface extends JFrame implements ActionListener {
-	// Invoke FactoryCommunicator & Controller Java interfaces
 	FactoryCommunicator fc;
 	Controller con;
 	
-	// Arrays for error-checking
 	private String[] provinces = {"Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador",
 			"Nova Scotia", "Ontario", "Quebec", "Prince Edward Island", "Saskatchewan"
 			};
@@ -23,11 +21,9 @@ public class UserInterface extends JFrame implements ActionListener {
 			"Victoria, British Columbia", "Windsor, Ontario", "Winnipeg, Manitoba"
             };
 	
-	// Flags for error-checking
 	private Boolean provinceFlag = false;
 	private Boolean cityFlag = false;
 	
-	// Major components used to display UI, initialized here
 	private JFrame frame1;
 	private JLabel title, introLabel, monthLabel1, monthLabel2, yearLabel1, yearLabel2, regionLabel1, regionLabel2;
     private JTextField monthField1, monthField2, yearField1, yearField2, regionField1, regionField2;
@@ -35,7 +31,6 @@ public class UserInterface extends JFrame implements ActionListener {
     private JScrollPane datesScrollPane, regionsScrollPane;
     private JButton submitButton, regionButton, seriesButton;
     
-    // regionsArray and seriesArray store regions and series respectively
     private JTextField[] regionsArray = {null};
     private JTextField[][] seriesArray = {{null}};
     
@@ -43,16 +38,25 @@ public class UserInterface extends JFrame implements ActionListener {
     private int newSeriesCounter = 1;
     
     public static void main(String[] args) {
-        // Create an instance of the program form and Controller/FactoryCommunicator interfaces for use
+        // Create an instance of the program form
+    	//ui connections
         UserInterface UI = new UserInterface();
 		ControllerIMPL c = new ControllerIMPL();
-		FactoryCommunicator fc = new VisualMaker();
-		
+		VisualMaker fc = new VisualMaker();
 		UI.setCon(c);
 		UI.setFC(fc);
+		
+		OpFacadeInter operFacade = new OperationFacade();
+		c.setOpFacade(operFacade);
+		
+		TableManager tableMan = new TableManager();
+		c.setTableMan(tableMan);
+		tableMan.addSubscriber(fc);
+		DatabaseAdapter dA = new DatabaseAdapter();
+		tableMan.setAdapter(dA);
+		
     }
     
-    // Main UI method, handles most UI tasks
     public UserInterface() {
     	frame1 = new JFrame();
     	title = new JLabel();
@@ -87,7 +91,6 @@ public class UserInterface extends JFrame implements ActionListener {
     	
     	Container frame1ContentPane = frame1.getContentPane();
     	
-    	// Set the main window's properties
     	frame1.setTitle("Project Zulu - NHPI Comparison & Forecasting");
     	frame1.setResizable(false);
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -172,7 +175,6 @@ public class UserInterface extends JFrame implements ActionListener {
         regionsArray = Arrays.copyOf(regionsArray, regionsArray.length + 1);
         regionsArray[regionsArray.length - 1] = regionField2;
         
-        // GroupLayout custom settings for the main window
 		GroupLayout frame1ContentPaneLayout = new GroupLayout(frame1ContentPane);
 		frame1ContentPane.setLayout(frame1ContentPaneLayout);
 		frame1ContentPaneLayout.setHorizontalGroup(
@@ -207,7 +209,6 @@ public class UserInterface extends JFrame implements ActionListener {
         frame1.setVisible(true);
     }
     
-    // This method handles all button presses & other functional logic in the program to display results
     @Override
     public void actionPerformed(ActionEvent e) {
     	Boolean noError = false;
@@ -223,13 +224,12 @@ public class UserInterface extends JFrame implements ActionListener {
         		prompt.dispose();
         	}
         });
-        
-        // If the Submit button is clicked, go to the next window for operation selection, then show the results as per requirements
+    	
         if (e.getSource() == submitButton) {
         	provinceFlag = false;
         	cityFlag = false;
         	
-        	// Validity check to see if a province and city were both entered, which is illegal
+        	// Get the user inputs and store them in variables, & show the next window
         	for (int i = 0; i < regionsArray.length; i++) {
         		String region = regionsArray[i].getText();
         		
@@ -831,7 +831,6 @@ public class UserInterface extends JFrame implements ActionListener {
         	}
         }
         
-        // If the Add Region button is clicked, then show an extra region field to type into
         else if (e.getSource() == regionButton) {
 			JLabel label = new JLabel("Region " + newRegionCounter + ":", JLabel.RIGHT);
 			label.setPreferredSize(new Dimension(85, 25));
@@ -852,7 +851,6 @@ public class UserInterface extends JFrame implements ActionListener {
 			newRegionCounter += 1;
         }
         
-        // If the Add Time-Series button is clicked, then show 4 extra date fields to type into
         else if (e.getSource() == seriesButton) {
         	if (newSeriesCounter == 1) {
         		JTextField[] tempArray1 = {monthField1, monthField2, yearField1, yearField2};
@@ -914,7 +912,6 @@ public class UserInterface extends JFrame implements ActionListener {
         frame1.repaint();
     }
     
-    // Below are setters for the interfaces used by the UI to communicate as per the UML design
     public void setFC(FactoryCommunicator f) {
     	this.fc = f;
     }

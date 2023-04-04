@@ -7,6 +7,13 @@ public class ControllerIMPL implements Controller{
 	TableRetriever tableManager;
 	OpFacadeInter operations;
 	
+	public void setTableMan(TableRetriever t) {
+		this.tableManager = t;
+	}
+	
+	public void setOpFacade(OpFacadeInter o) {
+		this.operations = o;
+	}
 	@Override
 	public void addRegion(String location) {
 		this.tableManager.addRegion(location);
