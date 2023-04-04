@@ -1,5 +1,4 @@
 
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -55,11 +54,7 @@ public class TableManager implements NHPIPublisher, TableRetriever {
 	
 
 
-	@Override
-	public void setExpectedTables(int i) {
-		// TODO Auto-generated method stub
-		this.expectedTables = i;
-	}
+
 
 
 	//Table retriever methods
@@ -97,4 +92,6 @@ public class TableManager implements NHPIPublisher, TableRetriever {
 	
 	
 	
+}
+
 }
