@@ -1,0 +1,953 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>2</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>388</x>
+      <y>100</y>
+      <w>42</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+GUI
+--
+...
+--
+...
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>328</y>
+      <w>164</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+OperationFacade
+--
+Operation o;
+
+--
+setMLForecast(); String 
+setStatTest(); String
+setNHPIComparison(); String
+LaunchOperation(List&lt;DataTable&gt;); void
+
+Responsibilitiy 
+A facade responsbility for calling the appropriate classes
+neccessary to successfully do either a Machine learning forecast,
+a statistical test or a NHPI comparison.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>324</x>
+      <y>136</y>
+      <w>88</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;430.0;10.0;380.0;420.0;380.0;420.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>318</x>
+      <y>442</y>
+      <w>52</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+MLForecast
+--
+...
+--
+provideTables(List&lt;DataTable&gt; l); void
+execute(); String
+clearTables(); void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>430</y>
+      <w>138</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>670.0;60.0;670.0;10.0;10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>192</x>
+      <y>652</y>
+      <w>52</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+NHPIDataTable (implements Iterable??)
+--
+String location;
+int startYear;
+int endYear;
+int startMonth;
+int endMonth;
+List&lt;double&gt; table;
+--
+#DataTable(); 
+#addValue(double d); void
+#getTable(); List&lt;int&gt; 
+#getStart(); String
+#getEnd(); String
+#getLocation(); String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>206</x>
+      <y>706</y>
+      <w>100</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+DatabaseAdapterIMPL
+
+--
+getFilledDataTable(String date1, String date2, String location)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>366</x>
+      <y>382</y>
+      <w>62</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+Operation
+--
+provideTables(List&lt;DataTable&gt; l); void
+execute(); String
+clearTables(); void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>422</y>
+      <w>6</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>208</x>
+      <y>776</y>
+      <w>28</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>MySQLDatabase</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>374</x>
+      <y>442</y>
+      <w>68</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+StatTest
+--
+List&lt;DataTable&gt; l;
+...
+--
+provideTables(List&lt;DataTable&gt; l); void
+execute(); String
+clearTables(); void
+fromListToArray(List&lt;Double&gt; l); double[]
+...</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>446</x>
+      <y>442</y>
+      <w>70</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+CompareNHPI
+--
+...
+--
+provideTables(List&lt;DataTable&gt; l); void
+execute(); String
+clearTables(); void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>392</x>
+      <y>430</y>
+      <w>6</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>34</x>
+      <y>516</y>
+      <w>580</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>Model Component</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>34</x>
+      <y>0</y>
+      <w>530</w>
+      <h>186</h>
+    </coordinates>
+    <panel_attributes>View Component</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>234</x>
+      <y>574</y>
+      <w>108</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+TableManager
+{Some Properties}
+--
+/int numOfTables;
+List&lt;String&gt; locations;
+List&lt;String&gt; dates;
+list&lt;DataTable&gt; l;
+Adapter a;
+--
+#unSubscribe(); void
+#requestDataTable(String date1, String date2, String location); List&lt;DataTable&gt;
++notifySubscribers(); void
++addSubscriber(); void
+addRegion(String location); void
+addTimeSeries(String date1, String date2); void
+getTables(); List&lt;DataTable&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>352</y>
+      <w>42</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+VisualHandler or something
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>378</y>
+      <w>40</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0;180.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>76</x>
+      <y>652</y>
+      <w>98</w>
+      <h>46</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+DataTable
+
+--
++getTable(); List&lt;double&gt; 
++getStartYear(); int
++getEndYear(); int
+getStartMonth(); int
+getEndMonth(); int
++addValue(double d); void
++getLocation(); String
+checkSameSeries(DataTable d); boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>714</y>
+      <w>102</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+Adapter
+--
+getFilledDataTable(String date1, String date2, Stinrg location); DataTable</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>304</x>
+      <y>720</y>
+      <w>36</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>584</y>
+      <w>94</w>
+      <h>46</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;
+NHPIPublisher
+{Some Properties}
+--
+#unSubscribe(TableManagerSubscriber s); void
++notifySubscribers(); void
++addSubscriber(); void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>138</x>
+      <y>634</y>
+      <w>122</w>
+      <h>22</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>590.0;10.0;590.0;30.0;10.0;30.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>268</x>
+      <y>634</y>
+      <w>78</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>370.0;400.0;370.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>124</x>
+      <y>696</y>
+      <w>86</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0;410.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>172</x>
+      <y>666</y>
+      <w>24</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>398</y>
+      <w>42</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+NHPILogicFacade
+
+--
+-id: Long
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>136</x>
+      <y>8</y>
+      <w>52</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface or Abstract Class&gt;&gt;
+graphCreator
+
+--
+...
+--
+create(List&lt;DataTable&gt; d); ChartPanel
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>200</x>
+      <y>602</y>
+      <w>38</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>272</x>
+      <y>72</y>
+      <w>62</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+VisualMaker
+--
+...
+VisualCreator c;
+--
+update(List&lt;DataTable&gt;
+setYearly();void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>272</x>
+      <y>20</y>
+      <w>64</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Stereotype&gt;&gt;
+TableManagerSubscriber
+
+--
+Update(List&lt;DataTable&gt; l); void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>292</x>
+      <y>38</y>
+      <w>6</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>248</x>
+      <y>28</y>
+      <w>28</w>
+      <h>550</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0;10.0;2730.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>34</x>
+      <y>190</y>
+      <w>530</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>Controller Componennt</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>22</y>
+      <w>28</w>
+      <h>82</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;390.0;120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>186</x>
+      <y>28</y>
+      <w>90</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>430.0;310.0;230.0;310.0;230.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>156</x>
+      <y>44</y>
+      <w>32</w>
+      <h>22</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;140.0;60.0;140.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>62</y>
+      <w>56</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+LineGraphCreator
+--
+create(List&lt;DataTable&gt; d); ChartPanel
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>118</x>
+      <y>54</y>
+      <w>44</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>572</x>
+      <y>90</y>
+      <w>38</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>ToDo list
+
+confirm which visuals will
+be used
+
+Create more sophisticated
+design for visuals
+
+Iron out operation facade
+
+Show exact type of relation
+ships between classes
+
+
+extra
+optimize coupling
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>340</y>
+      <w>42</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>Unused classes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>382</x>
+      <y>258</y>
+      <w>34</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>Facade Pattern present
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>366</x>
+      <y>614</y>
+      <w>34</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>Adapter Pattern Present
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>104</x>
+      <y>62</y>
+      <w>52</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+BarGraphCreator
+--
+create(List&lt;DataTable&gt; d); ChartPanel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>86</x>
+      <y>412</y>
+      <w>284</w>
+      <h>244</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=
+m2=1..*</panel_attributes>
+    <additional_attributes>1400.0;10.0;10.0;10.0;10.0;1200.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>192</x>
+      <y>4</y>
+      <w>28</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>do facotry method 
+pattern here
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>454</x>
+      <y>328</y>
+      <w>102</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+OpFacadeInter
+--
+setMLForecast(); String 
+setStatTest(); String
+setNHPIComparison(); String
+LaunchOperation(List&lt;DataTable&gt;); void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>430</x>
+      <y>364</y>
+      <w>54</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>250.0;10.0;250.0;100.0;10.0;100.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>760</y>
+      <w>6</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>338</x>
+      <y>2</y>
+      <w>48</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+factoryCommunicator
+--
+setCreatorLine(); void
+setCreatorWater(); void
+
+setYearly(); void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>332</x>
+      <y>38</y>
+      <w>34</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>150.0;10.0;150.0;330.0;10.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>222</y>
+      <w>76</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+Controller
+{Some Properties}
+--
+setMLForecast(); void 
+setStatTest(); void
+setNHPIComparison(); void
+launchOperation(); String
+addRegion(String location, String date1, String date2); void
+addTimeSeries(String Date1, String Date2);
+resetRegions(); void
+resetTimeSeries(); void
+execute(); void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>270</y>
+      <w>78</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+ControllerIMPL
+
+--
+setMLForecast(); void 
+setStatTest(); void
+setNHPIComparison(); void
+launchOperation(); String
+addRegion(String location, String date1, String date2); void
+addTimeSeries(String Date1, String Date2);
+resetData();void
+execute(); void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>276</x>
+      <y>526</y>
+      <w>88</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+TableRetriever
+--
+
+addRegion(String location); void
+addTimeSeries(String date1, String date2); void
+getTables(); List&lt;DataTable&gt;
+reset(); void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>314</x>
+      <y>562</y>
+      <w>6</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>322</x>
+      <y>262</y>
+      <w>6</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>284</y>
+      <w>130</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;630.0;10.0;630.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>276</x>
+      <y>276</y>
+      <w>16</w>
+      <h>254</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0;10.0;1250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>54</y>
+      <w>6</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>138</x>
+      <y>84</y>
+      <w>52</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+TableGraphCreator
+--
+create(List&lt;DataTable&gt; d); ChartPanel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>48</x>
+      <y>22</y>
+      <w>92</w>
+      <h>396</h>
+    </coordinates>
+    <panel_attributes>lt=.
+m1=
+m2=1..*</panel_attributes>
+    <additional_attributes>440.0;10.0;10.0;10.0;10.0;1100.0;320.0;1100.0;320.0;1960.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>212</x>
+      <y>112</y>
+      <w>64</w>
+      <h>306</h>
+    </coordinates>
+    <panel_attributes>lt=.
+m1=
+m2=1..*</panel_attributes>
+    <additional_attributes>300.0;10.0;10.0;10.0;10.0;1510.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>190</x>
+      <y>560</y>
+      <w>28</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>Observer pattern
+to view component
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>252</x>
+      <y>6</y>
+      <w>28</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>second half of
+observer pattern
+bg=orange
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
