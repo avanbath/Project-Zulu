@@ -1,5 +1,3 @@
-package my.custom.area;
-
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Iterator;

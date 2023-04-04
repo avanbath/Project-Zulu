@@ -93,5 +93,3 @@ public class TableManager implements NHPIPublisher, TableRetriever {
 	
 	
 }
-
-}
