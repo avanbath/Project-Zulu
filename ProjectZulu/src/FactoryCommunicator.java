@@ -1,4 +1,4 @@
-package my.custom.area;
+
 
 public interface FactoryCommunicator {
 	void setCreatorLine();
