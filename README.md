@@ -10,7 +10,7 @@ Team Members: Avaninder Bath | Nikolaos Diamantakis | John Wiens-Soshycki | Luan
 - All implemented parts of the application now work together, as part of the requirements for this application
 
 ## How To Start The Application
-- Install Java SE 19 and MySQL Community Server 8.0.32
+- Install Java SE 19 and MySQL/MySQL Server 8.0.32
 - During the installation of MySQL Server, set up your Workbench to have the username "root" and the password "root" for access to the database
 - Create a schema called "database" in MySQL Workbench, and open/run the NHPI-Database.sql file to complete setup of the database for this program
 - Run UserInterface.java - this is the main file of the program
