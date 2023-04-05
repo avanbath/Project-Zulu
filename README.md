@@ -3,6 +3,7 @@ Repository for the Project Zulu software application. This repository is created
 
 ##
 Team Name: Zulu
+
 Team Members: Avaninder Bath | Nikolaos Diamantakis | John Wiens-Soshycki | Luana Ribeiro Madeira
 
 ## Version 2.0 Notes
