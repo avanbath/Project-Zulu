@@ -2,31 +2,38 @@ import org.apache.commons.math3.stat.descriptive.*;
 import org.apache.commons.math3.stat.StatUtils;
 import java.util.List;
 import java.util.Iterator;
+
 public class CompareNHPI implements Operation{
 	List<DataTable> l;
 	
 	public void provideTables(List<DataTable> t) {
 		this.l = t;
 	}
-	//clear tables
+	
+	// Clear all tables
 	public void clearTables() {
 		this.l=null;
 	}
 	
 	public  double[] fromListToArray(List<Double> l) {
-		//iterator class 
+		// Iterator class 
 		
-		//count elements
+		// Count the elements
 		Iterator<Double> i = l.iterator();
+		
 		int c = 0;
+		
 		while(i.hasNext()) {
 			c++;
 		}
-		//put elements in array
+		
+		// Put the elements in an array
 		double[] a = new double[c];
+		
 		c = 0;
 		i = l.iterator();
 		a[c] = i.next();
+		
 		while (i.hasNext()) {
 			a[c] = i.next();
 			c++;
@@ -34,17 +41,17 @@ public class CompareNHPI implements Operation{
 		return a;
 	}
 	
-
 	public String execute() {
-		//check how many lists of NHPI's have been provided and create that amount of samples
+		// Check how many lists of NHPIs have been provided and create that amount of samples
 		int numberOfSamples = l.size();
 		String result=null;
 		double mean,stdDev,max,min,variance;
-		//get information for every list provided
+		
+		// Get information for every list provided
 		for (int i = 0; i<numberOfSamples; i++) {
 			double []sample = fromListToArray (l.get(i).getTable());
 			
-			//get statistical information about this current NHPI list
+			// Get statistical information about this current NHPI list
 			mean = StatUtils.mean(sample);
 			max = StatUtils.max(sample);
 			min = StatUtils.min(sample);
@@ -59,6 +66,4 @@ public class CompareNHPI implements Operation{
 		
 		return result;
 	}
-	
-	
 }

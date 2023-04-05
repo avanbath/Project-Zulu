@@ -1,12 +1,8 @@
-
-
 import java.util.List;
 import java.util.ArrayList;
 
-
-//no exceptions handled in current version 1.0
 public class NHPIDataTable implements DataTable {
-	//fields
+	// Initialized fields
 	String location;
 	int startYear;
 	int endYear;
@@ -14,7 +10,7 @@ public class NHPIDataTable implements DataTable {
 	int endMonth;
 	List<Double> table;
 	
-	//constructor
+	// Constructor method
 	public NHPIDataTable(String l, int sY, int eY, int sM, int eM) {
 		this.location = l;
 		this.startYear = sY;
@@ -24,7 +20,7 @@ public class NHPIDataTable implements DataTable {
 		this.table = new ArrayList<Double>();
 	}
 	
-	//setters and getters
+	// Setters and getters
 	@Override
 	public String getLocation() {
 		return this.location;
@@ -42,7 +38,6 @@ public class NHPIDataTable implements DataTable {
 	
 	@Override
 	public void addValue(double i) {
-		//add exception if table does not exist
 		this.table.add(i);
 	}
 
@@ -53,13 +48,11 @@ public class NHPIDataTable implements DataTable {
 
 	@Override
 	public int getStartMonth() {
-		// TODO Auto-generated method stub
 		return this.startMonth;
 	}
 
 	@Override
 	public int getEndMonth() {
-		// TODO Auto-generated method stub
 		return this.endMonth;
 	}
 
@@ -68,7 +61,7 @@ public class NHPIDataTable implements DataTable {
 		if (this.startYear == d.getStartYear() && this.endYear == d.getEndYear() && this.startMonth == d.getStartMonth() && this.endMonth == d.getEndMonth()) {
 			return true;
 		}
+		
 		return false;
 	}
-
 }

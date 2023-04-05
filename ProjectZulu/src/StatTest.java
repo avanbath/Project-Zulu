@@ -1,9 +1,9 @@
-
 import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.stat.inference.*;
 import java.lang.Math;
 import java.util.List;
 import java.util.Iterator;
+
 public class StatTest implements Operation {
 	
 	List<DataTable> l;

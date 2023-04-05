@@ -38,23 +38,20 @@ public class UserInterface extends JFrame implements ActionListener {
     private int newSeriesCounter = 1;
     
     public static void main(String[] args) {
-        // Create an instance of the program form
-    	//ui connections
+        // Create an instance of the program form with connections to classes
         UserInterface UI = new UserInterface();
 		ControllerIMPL c = new ControllerIMPL();
 		VisualMaker fc = new VisualMaker();
+		TableManager table = new TableManager();
+		OpFacadeInter facade = new OperationFacade();
+		DatabaseAdapter dA = new DatabaseAdapter();
+		
 		UI.setCon(c);
 		UI.setFC(fc);
-		
-		OpFacadeInter operFacade = new OperationFacade();
-		c.setOpFacade(operFacade);
-		
-		TableManager tableMan = new TableManager();
-		c.setTableMan(tableMan);
-		tableMan.addSubscriber(fc);
-		DatabaseAdapter dA = new DatabaseAdapter();
-		tableMan.setAdapter(dA);
-		
+		c.setOpFacade(facade);
+		c.setTableMan(table);
+		table.addSubscriber(fc);
+		table.setAdapter(dA);
     }
     
     public UserInterface() {
@@ -440,7 +437,6 @@ public class UserInterface extends JFrame implements ActionListener {
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                //backButton.setPreferredSize(new Dimension(150, 125));
                                 backButton.addActionListener(new ActionListener() {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
@@ -485,7 +481,6 @@ public class UserInterface extends JFrame implements ActionListener {
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                //backButton.setPreferredSize(new Dimension(150, 125));
                                 backButton.addActionListener(new ActionListener() {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
@@ -583,7 +578,7 @@ public class UserInterface extends JFrame implements ActionListener {
                                     
                                 // Add iterator here and show StatTest info
                                 while(it.hasNext()) {
-                                	tLabel.setText(it.next());
+                                	tLabel.setText(tLabel.getText() + it.next());
                                 }
                                 
                                 tLabel.setFont(selectLabel.getFont().deriveFont(14f));
@@ -591,7 +586,6 @@ public class UserInterface extends JFrame implements ActionListener {
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                //backButton.setPreferredSize(new Dimension(150, 125));
                                 backButton.addActionListener(new ActionListener() {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
@@ -631,7 +625,7 @@ public class UserInterface extends JFrame implements ActionListener {
                                     
                                 // Add iterator here and show StatTest info
                                 while(it.hasNext()) {
-                                	tLabel.setText(it.next());
+                                	tLabel.setText(tLabel.getText() + it.next());
                                 }
                                 
                                 tLabel.setFont(selectLabel.getFont().deriveFont(14f));
@@ -639,7 +633,6 @@ public class UserInterface extends JFrame implements ActionListener {
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                //backButton.setPreferredSize(new Dimension(150, 125));
                                 backButton.addActionListener(new ActionListener() {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
@@ -736,7 +729,7 @@ public class UserInterface extends JFrame implements ActionListener {
                                     
                                 // Add iterator here and show NHPI info
                                 while(it.hasNext()) {
-                                	nhpiLabel.setText(it.next());
+                                	nhpiLabel.setText(nhpiLabel.getText() + it.next());
                                 }
                                 
                                 nhpiLabel.setFont(selectLabel.getFont().deriveFont(14f));
@@ -744,7 +737,6 @@ public class UserInterface extends JFrame implements ActionListener {
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                //backButton.setPreferredSize(new Dimension(150, 125));
                                 backButton.addActionListener(new ActionListener() {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
@@ -767,7 +759,7 @@ public class UserInterface extends JFrame implements ActionListener {
                         		List<String> outputs = new ArrayList<String>();
                         		Iterator<String> it = outputs.iterator();
                         		
-                        		con.setStatTest();
+                        		con.setCompareNHPI();
                         		outputs = con.execute();
                         		
                         		frame3.setVisible(false);
@@ -785,7 +777,7 @@ public class UserInterface extends JFrame implements ActionListener {
                                     
                                 // Add iterator here and show NHPI info
                                 while(it.hasNext()) {
-                                	nhpiLabel.setText(it.next());
+                                	nhpiLabel.setText(nhpiLabel.getText() + it.next());
                                 }
                                 
                                 nhpiLabel.setFont(selectLabel.getFont().deriveFont(14f));
@@ -793,7 +785,6 @@ public class UserInterface extends JFrame implements ActionListener {
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                //backButton.setPreferredSize(new Dimension(150, 125));
                                 backButton.addActionListener(new ActionListener() {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {

@@ -1,14 +1,10 @@
-
-
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import org.jfree.chart.ChartPanel;
 
 public class VisualMaker implements TableManagerSubscriber, FactoryCommunicator {
@@ -27,20 +23,17 @@ public class VisualMaker implements TableManagerSubscriber, FactoryCommunicator 
 		this.creator = new BarGraphCreator();
 	}
 
-	
-
 	@Override
 	public void setYearly() {
 		// TODO Auto-generated method stub
 		this.yearly = true;
-		
 	}
 
 	@Override
 	public void update(List<DataTable> l) {
 		// TODO Auto-generated method stub
 		if (this.creator == null) {
-			System.out.println("You must set a creator before getting a visual");
+			System.out.println("You must set which graph to create before getting a visual to generate.");
 		}
 		
 		JPanel panel=new JPanel();
@@ -57,10 +50,10 @@ public class VisualMaker implements TableManagerSubscriber, FactoryCommunicator 
 			DataTable current = (DataTable) i.next();
 			if (sameSeries.get(sameSeries.size()-1).checkSameSeries(current)){
 				sameSeries.add(current);
-				System.out.println("Getting a table of the " + current.getLocation() + " series.");
+				System.out.println("Getting a table for the region: " + current.getLocation());
 			}
 			else {
-				System.out.println("Requesting chart panel for " + sameSeries.get(0).getLocation());
+				System.out.println("Requesting the chart panel for region: " + sameSeries.get(0).getLocation());
 				ChartPanel chart = this.creator.create(sameSeries);
 				panel.add(chart);
 				sameSeries = new ArrayList<DataTable>();
@@ -68,15 +61,10 @@ public class VisualMaker implements TableManagerSubscriber, FactoryCommunicator 
 				counter++;
 			}
 		}
-		//System.out.println("Creating another a final chart");
-		//ChartPanel chart = this.creator.create(sameSeries);
-		//System.out.println("Finished the final chart");
-		//panel.add(chart);
+
 		counter++;
 		frame.getContentPane().add(scrollBar);
         frame.setLayout(new GridLayout(1,counter));
         frame.setVisible(true);
-		
 	}
-
 }
