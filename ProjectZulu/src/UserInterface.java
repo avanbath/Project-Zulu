@@ -168,6 +168,14 @@ public class UserInterface extends JFrame implements ActionListener {
         seriesButton.addActionListener(this);
         buttonPanel.add(seriesButton);
         
+        seriesArray[0][0] = monthField1;
+		seriesArray[0] = Arrays.copyOf(seriesArray[0], seriesArray[0].length + 1);
+		seriesArray[0][seriesArray[0].length - 1] = monthField2;
+		seriesArray[0] = seriesArray[0] = Arrays.copyOf(seriesArray[0], seriesArray[0].length + 1);
+		seriesArray[0][seriesArray[0].length - 1] = yearField1;
+		seriesArray[0] = seriesArray[0] = Arrays.copyOf(seriesArray[0], seriesArray[0].length + 1);
+		seriesArray[0][seriesArray[0].length - 1] = yearField2;
+        
     	regionsArray[0] = regionField1;
         regionsArray = Arrays.copyOf(regionsArray, regionsArray.length + 1);
         regionsArray[regionsArray.length - 1] = regionField2;
@@ -262,26 +270,10 @@ public class UserInterface extends JFrame implements ActionListener {
             	        prompt.setVisible(true);
             		}
             		
-            		else {
+            		else if (cityFlag == false){
                 		noError = true;
                 		
-                    	String startMonth = monthField1.getText();
-                    	String endMonth = monthField2.getText();
-                        String startYear = yearField1.getText();
-                        String endYear = yearField2.getText();
-                        
                         con.addRegion(region);
-                        con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
-                        
-                        if (seriesArray.length == 2) {
-                        	startMonth = seriesArray[1][0].getText();
-                            endMonth = seriesArray[1][1].getText();
-                            startYear = seriesArray[1][2].getText();
-                            endYear = seriesArray[1][3].getText();
-                            
-                            con.addRegion(region);
-                            con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
-                        }
             		}
             	}
             	
@@ -308,28 +300,40 @@ public class UserInterface extends JFrame implements ActionListener {
             		else if (provinceFlag == false) {
                 		noError = true;
                 		
-                    	String startMonth = monthField1.getText();
-                    	String endMonth = monthField2.getText();
-                        String startYear = yearField1.getText();
-                        String endYear = yearField2.getText();
-                        
-                        con.addRegion(region);
-                        con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
-                        
-                        if (seriesArray.length == 2) {
-                        	startMonth = seriesArray[1][0].getText();
-                            endMonth = seriesArray[1][1].getText();
-                            startYear = seriesArray[1][2].getText();
-                            endYear = seriesArray[1][3].getText();
-                            
-                            con.addRegion(region);
-                            con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
-                        }
+                		con.addRegion(region);
             		}
             	}
             }
         	
+        	String startMonth = seriesArray[0][0].getText();
+        	String endMonth = seriesArray[0][1].getText();
+            String startYear = seriesArray[0][2].getText();
+            String endYear = seriesArray[0][3].getText();
+            
+        	con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
+        	System.out.println("Time Series Added: " + "{" + startYear + "-" + startMonth + ", " + endYear + "-" + endMonth + "}");
+            
+            if (seriesArray.length == 2) {
+            	startMonth = seriesArray[1][0].getText();
+                endMonth = seriesArray[1][1].getText();
+                startYear = seriesArray[1][2].getText();
+                endYear = seriesArray[1][3].getText();
+                
+                con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
+                System.out.println("Time Series Added: " + "{" + startYear + "-" + startMonth + ", " + endYear + "-" + endMonth + "}");
+            }
+        	
         	if (noError == true) {
+        		for (int i = 0; i < regionsArray.length; i++) {
+        			System.out.println(regionsArray[i].getText());
+        		}
+            	
+        		for (int i = 0; i < seriesArray.length; i++) {
+        			for (int j = 0; j < seriesArray[i].length; j++) {
+        				System.out.println(seriesArray[i][j].getText());
+        			}
+        		}
+
             	frame1.setVisible(false);
         		
                 JFrame frame2 = new JFrame();
