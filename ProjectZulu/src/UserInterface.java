@@ -413,7 +413,6 @@ public class UserInterface extends JFrame implements ActionListener {
                         		fc.setCreatorBar();
                         		
                         		List<String> outputs = new ArrayList<String>();
-                        		Iterator<String> it = outputs.iterator();
                         		
                         		con.setMLForecast();
                         		outputs = con.execute();
@@ -457,7 +456,6 @@ public class UserInterface extends JFrame implements ActionListener {
                         		fc.setCreatorLine();
                         		
                         		List<String> outputs = new ArrayList<String>();
-                        		Iterator<String> it = outputs.iterator();
                         		
                         		con.setMLForecast();
                         		outputs = con.execute();
@@ -558,15 +556,19 @@ public class UserInterface extends JFrame implements ActionListener {
                         		fc.setCreatorBar();
                         		
                         		List<String> outputs = new ArrayList<String>();
-                        		Iterator<String> it = outputs.iterator();
                         		
                         		con.setStatTest();
                         		outputs = con.execute();
                         		
+                        		Iterator<String> it = outputs.iterator();
+                        		
                         		frame3.setVisible(false);
                         		
                                 JFrame frame4 = new JFrame();
+                                
                                 JLabel tLabel = new JLabel();
+                                tLabel.setText("");
+                                
                                 JButton backButton = new JButton();
                                 	
                                 frame4.setTitle("Graph Information & Statistical Test");
@@ -605,10 +607,11 @@ public class UserInterface extends JFrame implements ActionListener {
                         	public void actionPerformed(ActionEvent e) {
                         		fc.setCreatorLine();
                         		List<String> outputs = new ArrayList<String>();
-                        		Iterator<String> it = outputs.iterator();
                         		
                         		con.setStatTest();
                         		outputs = con.execute();
+                        		
+                        		Iterator<String> it = outputs.iterator();
                         		
                         		frame3.setVisible(false);
                         		
@@ -709,10 +712,11 @@ public class UserInterface extends JFrame implements ActionListener {
                         		fc.setCreatorBar();
                         		
                         		List<String> outputs = new ArrayList<String>();
-                        		Iterator<String> it = outputs.iterator();
                         		
                         		con.setCompareNHPI();
                         		outputs = con.execute();
+                        		
+                        		Iterator<String> it = outputs.iterator();
                         		
                         		frame3.setVisible(false);
                         		
@@ -757,10 +761,11 @@ public class UserInterface extends JFrame implements ActionListener {
                         		fc.setCreatorLine();
                         		
                         		List<String> outputs = new ArrayList<String>();
-                        		Iterator<String> it = outputs.iterator();
                         		
                         		con.setCompareNHPI();
                         		outputs = con.execute();
+                        		
+                        		Iterator<String> it = outputs.iterator();
                         		
                         		frame3.setVisible(false);
                         		

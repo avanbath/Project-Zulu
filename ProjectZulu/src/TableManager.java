@@ -24,7 +24,6 @@ public class TableManager implements NHPIPublisher, TableRetriever {
 	
 	public DataTable requestDataTable(String date1, String date2, String location) {
 		DataTable d = this.d.getFilledDataTable(date1, date2, location);
-		listOfTables.add(d);
 		return d;
 	}
 
@@ -63,7 +62,7 @@ public class TableManager implements NHPIPublisher, TableRetriever {
 	@Override
 	public List<DataTable> getTables() {
 		// TODO Auto-generated method stub
-		for (int x=0; x<this.dates.size()/2; x=x+2) {
+		for (int x=0; x<this.dates.size()/2; x += 2) {
 			for (int y=0; y<this.locations.size(); y++) {
 				this.listOfTables.add(this.requestDataTable(this.dates.get(x), this.dates.get(x+1), this.locations.get(y)));
 				System.out.println("Trying to get a table for region: " + this.locations.get(y) + ", start date: " + this.dates.get(x) + ", end date: " + this.dates.get(x+1));

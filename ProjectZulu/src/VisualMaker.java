@@ -46,6 +46,7 @@ public class VisualMaker implements TableManagerSubscriber, FactoryCommunicator 
 		List<DataTable> sameSeries = new ArrayList<DataTable>();
 		sameSeries.add((DataTable) i.next());
 		System.out.println(sameSeries.get(0).getLocation());
+		
 		while (i.hasNext()) {
 			DataTable current = (DataTable) i.next();
 			if (sameSeries.get(sameSeries.size()-1).checkSameSeries(current)){

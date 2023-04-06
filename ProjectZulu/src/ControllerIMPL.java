@@ -44,21 +44,18 @@ public class ControllerIMPL implements Controller{
 
 	@Override
 	public List<String> execute() {
-//		try {
-//			return this.operations.launchOperation(this.tableManager.getTables());
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			String errorString = "An error occurred in the operation";
-//			List<String> result = new ArrayList<String>();
-//			result.add(errorString);
-//			return result;
-//		}
+		try {
+			return this.operations.launchOperation(this.tableManager.getTables());
+		}
 		
-		List<String> l = new ArrayList<String>();
-		l.add("Hello");
-		this.tableManager.getTables();
-		
-		return l;
+		catch (Exception e) {
+			e.printStackTrace();
+			String errorString = "An error occurred in the operation";
+			List<String> result = new ArrayList<String>();
+			
+			result.add(errorString);
+			
+			return result;
+		}
 	}
 }
