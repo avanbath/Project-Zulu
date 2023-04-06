@@ -1,10 +1,11 @@
+
 import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.stat.inference.*;
 import java.lang.Math;
 import java.util.List;
 import java.util.Iterator;
-
 public class StatTest implements Operation {
+	
 	List<DataTable> l;
 	
 	public void provideTables(List<DataTable> t) {
@@ -41,10 +42,10 @@ public class StatTest implements Operation {
 		
 		if(l.size()!= 2) {
 			throw new Exception("2 Lists must be provided only.");
-		}
+			}
 		//get the two lists of NHPI's
-		double[]sample1 = fromListToArray(l.get(0).getTable());
-		double[]sample2 = fromListToArray(l.get(1).getTable());
+		double[]sample1 = fromListToArray (l.get(0).getTable());
+		double[]sample2 =fromListToArray (l.get(1).getTable());
 		
 		String result = "default";
 		double tscore;
@@ -66,4 +67,6 @@ public class StatTest implements Operation {
   	    }
 		return result;
 	}
+	
+	
 }

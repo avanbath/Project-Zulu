@@ -1,3 +1,5 @@
+
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class ControllerIMPL implements Controller{
 		this.tableManager.reset();
 	}
 
+
 	@Override
 	public void setStatTest() {
 		this.operations.setStatTest();
@@ -44,18 +47,22 @@ public class ControllerIMPL implements Controller{
 
 	@Override
 	public List<String> execute() {
+		/*
 		try {
 			return this.operations.launchOperation(this.tableManager.getTables());
-		}
-		
-		catch (Exception e) {
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			String errorString = "An error occurred in the operation";
+			String errorString = "An error occured in the operation";
 			List<String> result = new ArrayList<String>();
-			
 			result.add(errorString);
-			
 			return result;
 		}
+		*/
+		List<String> temp = new ArrayList<String>();
+		this.tableManager.getTables();
+		return temp;
+		
 	}
+
 }

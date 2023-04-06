@@ -23,6 +23,7 @@ public class UserInterface extends JFrame implements ActionListener {
 	
 	private Boolean provinceFlag = false;
 	private Boolean cityFlag = false;
+	private Boolean firstRegionRun = true;
 	
 	private JFrame frame1;
 	private JLabel title, introLabel, monthLabel1, monthLabel2, yearLabel1, yearLabel2, regionLabel1, regionLabel2;
@@ -191,7 +192,7 @@ public class UserInterface extends JFrame implements ActionListener {
 			.addComponent(title, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 			.addComponent(buttonPanel, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 			.addGroup(GroupLayout.Alignment.LEADING, frame1ContentPaneLayout.createSequentialGroup()
-			.addComponent(mainPanel, GroupLayout.PREFERRED_SIZE, 660, GroupLayout.PREFERRED_SIZE)
+			.addComponent(mainPanel, GroupLayout.PREFERRED_SIZE, 720, GroupLayout.PREFERRED_SIZE)
 			.addGap(0, 0, Short.MAX_VALUE)))
 			.addContainerGap())
 		);
@@ -215,7 +216,7 @@ public class UserInterface extends JFrame implements ActionListener {
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) { 
     	Boolean noError = false;
     	JDialog prompt = new JDialog();
     	JLabel invalidLabel = new JLabel();
@@ -324,16 +325,6 @@ public class UserInterface extends JFrame implements ActionListener {
             }
         	
         	if (noError == true) {
-        		for (int i = 0; i < regionsArray.length; i++) {
-        			System.out.println(regionsArray[i].getText());
-        		}
-            	
-        		for (int i = 0; i < seriesArray.length; i++) {
-        			for (int j = 0; j < seriesArray[i].length; j++) {
-        				System.out.println(seriesArray[i][j].getText());
-        			}
-        		}
-
             	frame1.setVisible(false);
         		
                 JFrame frame2 = new JFrame();
@@ -400,7 +391,8 @@ public class UserInterface extends JFrame implements ActionListener {
                         	@Override
                         	public void actionPerformed(ActionEvent e) {
                         		frame3.dispose();
-                        		frame2.setVisible(true);
+                        		con.resetData();
+                        		frame1.setVisible(true);
                         	}
                         });
                 		
@@ -444,7 +436,8 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
                                 		frame4.dispose();
-                                		frame3.setVisible(true);
+                                		con.resetData();
+                                		frame1.setVisible(true);
                                 	}
                                 });
                                 
@@ -487,7 +480,8 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
                                 		frame4.dispose();
-                                		frame3.setVisible(true);
+                                		con.resetData();
+                                		frame1.setVisible(true);
                                 	}
                                 });
 
@@ -543,7 +537,8 @@ public class UserInterface extends JFrame implements ActionListener {
                         	@Override
                         	public void actionPerformed(ActionEvent e) {
                         		frame3.dispose();
-                        		frame2.setVisible(true);
+                        		con.resetData();
+                        		frame1.setVisible(true);
                         	}
                         });
                 		
@@ -596,7 +591,8 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
                                 		frame4.dispose();
-                                		frame3.setVisible(true);
+                                		con.resetData();
+                                		frame1.setVisible(true);
                                 	}
                                 });
                                 
@@ -644,7 +640,8 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
                                 		frame4.dispose();
-                                		frame3.setVisible(true);
+                                		con.resetData();
+                                		frame1.setVisible(true);
                                 	}
                                 });
                                 
@@ -699,7 +696,8 @@ public class UserInterface extends JFrame implements ActionListener {
                         	@Override
                         	public void actionPerformed(ActionEvent e) {
                         		frame3.dispose();
-                        		frame2.setVisible(true);
+                        		con.resetData();
+                        		frame1.setVisible(true);
                         	}
                         });
                 		
@@ -749,7 +747,8 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
                                 		frame4.dispose();
-                                		frame3.setVisible(true);
+                                		con.resetData();
+                                		frame1.setVisible(true);
                                 	}
                                 });
                                 
@@ -798,7 +797,8 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	@Override
                                 	public void actionPerformed(ActionEvent e) {
                                 		frame4.dispose();
-                                		frame3.setVisible(true);
+                                		con.resetData();
+                                		frame1.setVisible(true);
                                 	}
                                 });
                                 
@@ -845,8 +845,39 @@ public class UserInterface extends JFrame implements ActionListener {
 			newPair.add(label);
 			newPair.add(field);
 			
+			/*
+			JButton removeRButton = new JButton();
+			buttonPanel.add(removeRButton);
+			removeRButton.setText("Remove Region " + newRegionCounter);
+			removeRButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            removeRButton.addActionListener(new ActionListener() {
+            	@Override
+            	public void actionPerformed(ActionEvent e) {
+            		if ((newRegionCounter - 3) == 1) {
+            			firstRegionRun = true;
+            		}
+            		removeRButton.setVisible(false);
+            		controlPanel2.remove(newPair);
+            		buttonPanel.remove(removeRButton);
+            		
+            		newRegionCounter -= 1;
+            		
+                    frame1.revalidate();
+                    frame1.repaint();
+            	}
+            });
+            */
+			
 			regionsArray = Arrays.copyOf(regionsArray, regionsArray.length + 1);
 			regionsArray[regionsArray.length - 1] = field;
+			
+			/*
+			if (firstRegionRun == true) {
+				firstRegionRun = false;
+				
+				buttonPanel.add(removeRButton);
+			}
+			*/
 			
 			newRegionCounter += 1;
         }
@@ -859,13 +890,13 @@ public class UserInterface extends JFrame implements ActionListener {
         	
         	newSeriesCounter += 1;
 			
-			JLabel label1 = new JLabel("Start Month " + newSeriesCounter + ":", JLabel.RIGHT);
+			JLabel label1 = new JLabel("Start Month 2:", JLabel.RIGHT);
 			label1.setPreferredSize(new Dimension(85, 25));
-			JLabel label2 = new JLabel("End Month " + newSeriesCounter + ":", JLabel.RIGHT);
+			JLabel label2 = new JLabel("End Month 2:", JLabel.RIGHT);
 			label2.setPreferredSize(new Dimension(85, 25));
-			JLabel label3 = new JLabel("Start Year " + newSeriesCounter + ":", JLabel.RIGHT);
+			JLabel label3 = new JLabel("Start Year 2:", JLabel.RIGHT);
 			label3.setPreferredSize(new Dimension(85, 25));
-			JLabel label4 = new JLabel("End Year " + newSeriesCounter + ":", JLabel.RIGHT);
+			JLabel label4 = new JLabel("End Year 2:", JLabel.RIGHT);
 			label4.setPreferredSize(new Dimension(85, 25));
 			
 			JTextField field1 = new JTextField();
@@ -901,11 +932,34 @@ public class UserInterface extends JFrame implements ActionListener {
 			newPair4.add(label4);
 			newPair4.add(field4);
 			
+			/*
+			JButton removeSButton = new JButton();
+			removeSButton.setText("Remove Time-Series");
+			removeSButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            removeSButton.addActionListener(new ActionListener() {
+            	@Override
+            	public void actionPerformed(ActionEvent e) {
+            		controlPanel1.remove(newPair1);
+            		controlPanel1.remove(newPair2);
+            		controlPanel1.remove(newPair3);
+            		controlPanel1.remove(newPair4);
+            		
+            		buttonPanel.remove(removeSButton);
+            		buttonPanel.add(seriesButton);
+            		
+                    frame1.revalidate();
+                    frame1.repaint();
+            	}
+            });
+            */
+			
+			
 			seriesArray = Arrays.copyOf(seriesArray, seriesArray.length + 1);
 			JTextField[] tempArray2 = {field1, field2, field3, field4};
 			seriesArray[seriesArray.length - 1] = tempArray2;
 			
 			buttonPanel.remove(seriesButton);
+			// buttonPanel.add(removeSButton);
         }
         
         frame1.revalidate();
