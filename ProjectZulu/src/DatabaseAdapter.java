@@ -63,7 +63,7 @@ public class DatabaseAdapter implements Adapter{
             statement.setInt(3, Integer.parseInt(sy));
             statement.setString(4, sm);
             statement.setInt(5, Integer.parseInt(sy));
-            System.out.println("End year sent to database is " + ey);
+            
             statement.setInt(6, Integer.parseInt(ey));
             statement.setInt(7, Integer.parseInt(ey));
             statement.setString(8, em);
@@ -74,7 +74,6 @@ public class DatabaseAdapter implements Adapter{
             // | YEAR | MONTH | LOCATION | NHPI |
             while (resultSet.next()) { 
             	d.addValue(resultSet.getDouble(4));
-            	System.out.println("Number of nhpi added to new dataTable" + count);
             	count++;
           }
             //System.out.println("(DATABASE OUTPUT) " + "Region: " + d.getLocation() + ", first NHPI value: " + d.getTable().get(0) + ", second NHPI value: " + d.getTable().get(1));
