@@ -37,7 +37,7 @@ public class BarGraphCreator implements GraphCreator{
 			int yearCount = 0;
 			while (doubleIterator.hasNext()) {
 				String date = "";
-				System.out.println("Curent month before if " + monthCount);
+				
 				if (monthCount == 12 || first) {
 					monthCount = 0;
 					first = false;
@@ -45,7 +45,7 @@ public class BarGraphCreator implements GraphCreator{
 					dSet.addValue(doubleIterator.next(), dataTable.getLocation(), date);
 					yearCount++;
 				}
-				System.out.println("Curent month after if " + monthCount);
+				
 
 				doubleIterator.next();
 				monthCount++;

@@ -60,32 +60,28 @@ public class TableManager implements NHPIPublisher, TableRetriever {
 	@Override
 	public void addRegion(String location) {
 		this.locations.add(location);
+		System.out.println("REGION ADDED TO TABLE MANAGER " + location);
 	}
 
 	@Override
 	public void addTimeSeries(String date1, String date2) {
 		this.dates.add(date1);
 		this.dates.add(date2);
+		System.out.println("TIME SERIES ADDED TO TABLE MANAGER " + date1 + ", " + date2);
 	}
 
 	@Override
 	public List<DataTable> getTables() {
 		// TODO Auto-generated method stub
 		//for loop should handle getting time series and add seperately
-		System.out.println("The number of time series is " + (this.dates.size()/2) + " raw value is " + this.dates.size());
-		System.out.println("The number of locations is " + this.locations.size());
 		for (int x=0; x<this.dates.size(); x=x+2) {
-			System.out.println("The current value of x is " + x);
 			for (int y=0; y<this.locations.size(); y++) {
-				//System.out.println("Trying to get a table for " + this.locations.get(y) + " " + this.dates.get(x) + " " + this.dates.get(x+1));
-				System.out.println("The current value of y is " + y);
+				System.out.println("REQUESTING TABLE FOR " + this.dates.get(x) + "," + this.dates.get(x+1) + ", " + this.locations.get(y));
 				this.listOfTables.add(this.requestDataTable(this.dates.get(x), this.dates.get(x+1), this.locations.get(y)));
-				System.out.println("The amount of dataTables made is! " + this.listOfTables.size());
-				//System.out.println("Trying to get a table for " + this.locations.get(y) + " " + this.dates.get(x) + " " + this.dates.get(x+1));
 			}
 		}
-		System.out.println("The amount of dataTables made is* " + this.listOfTables.size());
 		this.notifySubscribers();
+		System.out.println("The number of tables should be (Table Manager) " + this.listOfTables.size());
 		return this.listOfTables;
 	}
 

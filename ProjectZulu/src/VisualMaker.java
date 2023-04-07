@@ -63,9 +63,10 @@ public class VisualMaker implements TableManagerSubscriber, FactoryCommunicator 
 				DataTable current = (DataTable) i.next();
 				if (sameSeries.get(sameSeries.size()-1).checkSameSeries(current)){
 					sameSeries.add(current);
+					System.out.println("Just added " + current.getLocation() + " to same series");
 				}
 				else {
-					System.out.println("Requesting chart panel for " + sameSeries.get(0).getStartYear() + ", " + sameSeries.get(0).getEndYear());
+					System.out.println("Requesting chart panel for " + sameSeries.get(0).getStartYear() + ", " + sameSeries.get(0).getEndYear() + ", " + sameSeries.get(0).getLocation());
 					ChartPanel chart = this.creator.create(sameSeries);
 					System.out.println("Displaying chart panel");
 					panel.add(chart);
