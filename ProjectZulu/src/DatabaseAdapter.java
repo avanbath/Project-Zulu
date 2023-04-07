@@ -23,7 +23,7 @@ public class DatabaseAdapter implements Adapter{
 	
 	protected ResultSet callDB(String startMonth, String endMonth, int startYear, int endYear, String region) {
     	try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database","root","root");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database","root","RinkyDinky8?");
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM database.location WHERE location = ? AND LENGTH(location) = LENGTH(?) AND ((year = ? AND month >= ?) OR (year > ? AND year < ?) OR (year = ? AND month <= ?)) ORDER BY location, year, month");
             statement.setString(1, region);
             statement.setString(2, region);
@@ -54,7 +54,7 @@ public class DatabaseAdapter implements Adapter{
 		DataTable d = new NHPIDataTable(location, Integer.parseInt(sy), Integer.parseInt(ey), Integer.parseInt(sm), Integer.parseInt(em));
 		
 		try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database","root","root");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database","root","RinkyDinky8?");
             
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM database.location WHERE location = ? AND LENGTH(location) = LENGTH(?) AND ((year = ? AND month >= ?) OR (year > ? AND year < ?) OR (year = ? AND month <= ?)) ORDER BY location, year, month");
             
