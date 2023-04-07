@@ -51,11 +51,6 @@ public class OperationFacade implements OpFacadeInter{
 		results.add(this.o.execute());
 		this.o.clearTables();
 		
-		
-		return results;
-		
+		return results;	
 	}
-
-	
-	
 }

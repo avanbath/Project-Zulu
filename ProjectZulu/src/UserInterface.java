@@ -94,10 +94,10 @@ public class UserInterface extends JFrame implements ActionListener {
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         title.setText("Project Zulu - NHPI Comparison & Forecasting");
-        title.setFont(new Font("Sego UI", Font.BOLD, 22));
+        title.setFont(new Font("Sego UI", Font.BOLD, 26));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         
-        introLabel.setText("Please enter your start/end months/years and regions you would like to get NHPI data for.");
+        introLabel.setText("Please enter your start/end months/years and regions you would like to get NHPI data for");
         introLabel.setFont(introLabel.getFont().deriveFont(14f));
         introLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
@@ -107,30 +107,30 @@ public class UserInterface extends JFrame implements ActionListener {
         controlPanel1.setLayout(new BoxLayout(controlPanel1, BoxLayout.Y_AXIS));
         pair1.setLayout(new FlowLayout());
         monthLabel1.setText("Start Month 1:");
-        monthLabel1.setPreferredSize(new Dimension(85, 25));
+        monthLabel1.setPreferredSize(new Dimension(80, 25));
         pair1.add(monthLabel1);
-        monthField1.setPreferredSize(new Dimension(200, 25));
+        monthField1.setPreferredSize(new Dimension(90, 25));
         pair1.add(monthField1);
         controlPanel1.add(pair1);
         pair2.setLayout(new FlowLayout());
         monthLabel2.setText("End Month 1:");
-        monthLabel2.setPreferredSize(new Dimension(85, 25));
+        monthLabel2.setPreferredSize(new Dimension(80, 25));
         pair2.add(monthLabel2);
-        monthField2.setPreferredSize(new Dimension(200, 25));
+        monthField2.setPreferredSize(new Dimension(90, 25));
         pair2.add(monthField2);
         controlPanel1.add(pair2);
         pair3.setLayout(new FlowLayout());
         yearLabel1.setText("Start Year 1:");
-        yearLabel1.setPreferredSize(new Dimension(85, 25));
+        yearLabel1.setPreferredSize(new Dimension(80, 25));
         pair3.add(yearLabel1);
-        yearField1.setPreferredSize(new Dimension(200, 25));
+        yearField1.setPreferredSize(new Dimension(90, 25));
         pair3.add(yearField1);
         controlPanel1.add(pair3);
         pair4.setLayout(new FlowLayout());
         yearLabel2.setText("End Year 1:");
-        yearLabel2.setPreferredSize(new Dimension(85, 25));
+        yearLabel2.setPreferredSize(new Dimension(80, 25));
         pair4.add(yearLabel2);
-        yearField2.setPreferredSize(new Dimension(200, 25));
+        yearField2.setPreferredSize(new Dimension(90, 25));
         pair4.add(yearField2);
         controlPanel1.add(pair4);
         datesScrollPane.setViewportView(controlPanel1);
@@ -140,14 +140,14 @@ public class UserInterface extends JFrame implements ActionListener {
         controlPanel2.setLayout(new BoxLayout(controlPanel2, BoxLayout.Y_AXIS));
         pair5.setLayout(new FlowLayout());
         regionLabel1.setText("Region 1:");
-        regionLabel1.setPreferredSize(new Dimension(85, 25));
+        regionLabel1.setPreferredSize(new Dimension(60, 25));
         pair5.add(regionLabel1);
         regionField1.setPreferredSize(new Dimension(200, 25));
         pair5.add(regionField1);
         controlPanel2.add(pair5);
         pair6.setLayout(new FlowLayout());
         regionLabel2.setText("Region 2:");
-        regionLabel2.setPreferredSize(new Dimension(85, 25));
+        regionLabel2.setPreferredSize(new Dimension(60, 25));
         pair6.add(regionLabel2);
         regionField2.setPreferredSize(new Dimension(200, 25));
         pair6.add(regionField2);
@@ -217,7 +217,8 @@ public class UserInterface extends JFrame implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) { 
-    	Boolean noError = false;
+    	Boolean noRegionErrors = false;
+    	Boolean noSeriesErrors = false;
     	JDialog prompt = new JDialog();
     	JLabel invalidLabel = new JLabel();
     	JButton okButton = new JButton();
@@ -239,92 +240,159 @@ public class UserInterface extends JFrame implements ActionListener {
         	for (int i = 0; i < regionsArray.length; i++) {
         		String region = regionsArray[i].getText();
         		
-                for (int j = 0; j < provinces.length; j++) {
-                	if (region.equals(provinces[j])) {
-                		provinceFlag = true;
-                	}
-                }
-                
-                for (int k = 0; k < cities.length; k++) {
-                	if (region.equals(cities[k]))  {
-                		cityFlag = true;
-                	}
-                }
-                
-            	if (provinceFlag == true) {
-            		if (cityFlag == true) {
-            			noError = false;
-            			
-            			// Update UI to show error pop-up
-            			prompt.setTitle("Invalid Input");
-            	    	prompt.setResizable(false);
-            	    	prompt.setPreferredSize(new Dimension(300, 100));
-            	    	prompt.setLayout(new FlowLayout());
-            	    	
-            	        invalidLabel.setText("Please enter only provinces or only cities");
-            	        
-            	        prompt.add(invalidLabel);
-            	        prompt.add(okButton);
-            	        prompt.pack();
-            	        prompt.setLocationRelativeTo(null);
-            	        prompt.setAlwaysOnTop(true);
-            	        prompt.setVisible(true);
-            		}
-            		
-            		else if (cityFlag == false){
-                		noError = true;
+        		if (region.equals(null) || region.equals("") || region.equals(" ")) {
+        			noRegionErrors = false;
+        			
+        			// Update UI to show error pop-up
+        			prompt.setTitle("Invalid Input");
+        	    	prompt.setResizable(false);
+        	    	prompt.setPreferredSize(new Dimension(300, 100));
+        	    	prompt.setLayout(new FlowLayout());
+        	    	
+        	        invalidLabel.setText("Do not leave any field(s) blank and try again");
+        	        
+        	        prompt.add(invalidLabel);
+        	        prompt.add(okButton);
+        	        prompt.pack();
+        	        prompt.setLocationRelativeTo(null);
+        	        prompt.setAlwaysOnTop(true);
+        	        prompt.setVisible(true);
+        		}
+        		
+        		else {
+                    for (int j = 0; j < provinces.length; j++) {
+                    	if (region.equals(provinces[j])) {
+                    		provinceFlag = true;
+                    	}
+                    }
+                    
+                    for (int k = 0; k < cities.length; k++) {
+                    	if (region.equals(cities[k]))  {
+                    		cityFlag = true;
+                    	}
+                    }
+                    
+                	if (provinceFlag == true) {
+                		if (cityFlag == true) {
+                			noRegionErrors = false;
+                			
+                			// Update UI to show error pop-up
+                			prompt.setTitle("Invalid Input");
+                	    	prompt.setResizable(false);
+                	    	prompt.setPreferredSize(new Dimension(300, 100));
+                	    	prompt.setLayout(new FlowLayout());
+                	    	
+                	        invalidLabel.setText("Enter only provinces or only cities and try again");
+                	        
+                	        prompt.add(invalidLabel);
+                	        prompt.add(okButton);
+                	        prompt.pack();
+                	        prompt.setLocationRelativeTo(null);
+                	        prompt.setAlwaysOnTop(true);
+                	        prompt.setVisible(true);
+                		}
                 		
-                        con.addRegion(region);
-            		}
-            	}
-            	
-            	else if (cityFlag == true) {
-            		if (provinceFlag == true) {
-            			noError = false;
-            			
-            			// Update UI to show error pop-up
-            			prompt.setTitle("Invalid Input");
-            	    	prompt.setResizable(false);
-            	    	prompt.setPreferredSize(new Dimension(300, 100));
-            	    	prompt.setLayout(new FlowLayout());
-            	    	
-            	        invalidLabel.setText("Please enter only provinces or only cities");
-            	        
-            	        prompt.add(invalidLabel);
-            	        prompt.add(okButton);
-            	        prompt.pack();
-            	        prompt.setLocationRelativeTo(null);
-            	        prompt.setAlwaysOnTop(true);
-            	        prompt.setVisible(true);
-            		}
-            		
-            		else if (provinceFlag == false) {
-                		noError = true;
+                		else if (cityFlag == false){
+                    		noRegionErrors = true;
+                    		
+                            con.addRegion(region);
+                		}
+                	}
+                	
+                	else if (cityFlag == true) {
+                		if (provinceFlag == true) {
+                			noRegionErrors = false;
+                			
+                			// Update UI to show error pop-up
+                			prompt.setTitle("Invalid Input");
+                	    	prompt.setResizable(false);
+                	    	prompt.setPreferredSize(new Dimension(300, 100));
+                	    	prompt.setLayout(new FlowLayout());
+                	    	
+                	        invalidLabel.setText("Enter only provinces or only cities and try again");
+                	        
+                	        prompt.add(invalidLabel);
+                	        prompt.add(okButton);
+                	        prompt.pack();
+                	        prompt.setLocationRelativeTo(null);
+                	        prompt.setAlwaysOnTop(true);
+                	        prompt.setVisible(true);
+                		}
                 		
-                		con.addRegion(region);
-            		}
-            	}
+                		else if (provinceFlag == false) {
+                    		noRegionErrors = true;
+                    		
+                    		con.addRegion(region);
+                		}
+                	}
+        		}
             }
         	
-        	String startMonth = seriesArray[0][0].getText();
-        	String endMonth = seriesArray[0][1].getText();
-            String startYear = seriesArray[0][2].getText();
-            String endYear = seriesArray[0][3].getText();
-            
-        	con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
-        	System.out.println("Time Series Added: " + "{" + startYear + "-" + startMonth + ", " + endYear + "-" + endMonth + "}");
-            
-            if (seriesArray.length == 2) {
-            	startMonth = seriesArray[1][0].getText();
-                endMonth = seriesArray[1][1].getText();
-                startYear = seriesArray[1][2].getText();
-                endYear = seriesArray[1][3].getText();
+        	if (noRegionErrors == true) {
+        		String startMonth = seriesArray[0][0].getText();
+            	String endMonth = seriesArray[0][1].getText();
+                String startYear = seriesArray[0][2].getText();
+                String endYear = seriesArray[0][3].getText();
                 
-                con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
-                System.out.println("Time Series Added: " + "{" + startYear + "-" + startMonth + ", " + endYear + "-" + endMonth + "}");
-            }
+                if (startMonth.equals("") || endMonth.equals("") || startYear.equals("") || endYear.equals("")) {
+                	noSeriesErrors = false;
+        			
+        			// Update UI to show error pop-up
+        			prompt.setTitle("Invalid Input");
+        	    	prompt.setResizable(false);
+        	    	prompt.setPreferredSize(new Dimension(300, 100));
+        	    	prompt.setLayout(new FlowLayout());
+        	    	
+        	    	invalidLabel.setText("Do not leave any field(s) blank and try again");
+        	        
+        	        prompt.add(invalidLabel);
+        	        prompt.add(okButton);
+        	        prompt.pack();
+        	        prompt.setLocationRelativeTo(null);
+        	        prompt.setAlwaysOnTop(true);
+        	        prompt.setVisible(true);
+                }
+                
+                else {
+                	noSeriesErrors = true;
+                	
+                	con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
+                	System.out.println("Time Series Added: " + "{" + startYear + "-" + startMonth + ", " + endYear + "-" + endMonth + "}");
+                    
+                    if (seriesArray.length == 2) {
+                    	startMonth = seriesArray[1][0].getText();
+                        endMonth = seriesArray[1][1].getText();
+                        startYear = seriesArray[1][2].getText();
+                        endYear = seriesArray[1][3].getText();
+                        
+                        if (startMonth.equals("") || endMonth.equals("") || startYear.equals("") || endYear.equals("")) {
+                        	noSeriesErrors = false;
+                        	
+                			// Update UI to show error pop-up
+                			prompt.setTitle("Invalid Input");
+                	    	prompt.setResizable(false);
+                	    	prompt.setPreferredSize(new Dimension(300, 100));
+                	    	prompt.setLayout(new FlowLayout());
+                	    	
+                	    	invalidLabel.setText("Do not leave any field(s) blank and try again");
+                	        
+                	        prompt.add(invalidLabel);
+                	        prompt.add(okButton);
+                	        prompt.pack();
+                	        prompt.setLocationRelativeTo(null);
+                	        prompt.setAlwaysOnTop(true);
+                	        prompt.setVisible(true);
+                        }
+                        
+                        else {
+                            con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
+                            System.out.println("Time Series Added: " + "{" + startYear + "-" + startMonth + ", " + endYear + "-" + endMonth + "}");
+                        }
+                    }
+                }
+        	}
         	
-        	if (noError == true) {
+        	if (noSeriesErrors == true) {
             	frame1.setVisible(false);
         		
                 JFrame frame2 = new JFrame();
@@ -338,16 +406,16 @@ public class UserInterface extends JFrame implements ActionListener {
                 frame2.setTitle("Project Zulu - NHPI Comparison & Forecasting");
                 frame2.setResizable(false);
                 frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame2.setLayout(new FlowLayout());
-                frame2.setSize(500, 400);
+                frame2.setLayout(new BoxLayout(frame2.getContentPane(), BoxLayout.Y_AXIS));
+                frame2.setSize(400, 200);
                 frame2.setLocationRelativeTo(null);
                     
-                selectLabel.setText("Select the operation that would you like to perform: ");
+                selectLabel.setText("Select the operation that would you like to perform:");
                 selectLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                selectLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                selectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
                     
                 operPanel.setLayout(new FlowLayout());
-                operPanel.setPreferredSize(new Dimension(250, 90));
+                operPanel.setMaximumSize(new Dimension(250, 105));
                     
                 mlButton.setText("Generate Forecast Graph");
                 mlButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -367,15 +435,16 @@ public class UserInterface extends JFrame implements ActionListener {
                         frame3.setTitle("Select Graph");
                         frame3.setResizable(false);
                         frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame3.setLayout(new FlowLayout());
-                        frame3.setSize(600, 120);
+                        frame3.setLayout(new BoxLayout(frame3.getContentPane(), BoxLayout.Y_AXIS));
+                        frame3.setSize(400, 145);
                         frame3.setLocationRelativeTo(null);
                 		
-                		graphSelectLabel.setText("Which type of graph would you like to choose?:");
+                		graphSelectLabel.setText("Which type of graph would you like to choose?");
                         graphSelectLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                        graphSelectLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                        graphSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
                         
                         gPanel.setLayout(new FlowLayout());
+                        gPanel.setMaximumSize(new Dimension(400, 50));
                         
                         lineG.setText("Line Graph");
                         lineG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -387,6 +456,7 @@ public class UserInterface extends JFrame implements ActionListener {
                         
                         backButton.setText("Go Back");
                         backButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
                         backButton.addActionListener(new ActionListener() {
                         	@Override
                         	public void actionPerformed(ActionEvent e) {
@@ -413,6 +483,8 @@ public class UserInterface extends JFrame implements ActionListener {
                         		con.setMLForecast();
                         		outputs = con.execute();
                         		
+                        		Iterator<String> it = outputs.iterator();
+                        		
                         		frame3.setVisible(false);
                         		
                                 JFrame frame4 = new JFrame();
@@ -422,13 +494,16 @@ public class UserInterface extends JFrame implements ActionListener {
                                 frame4.setTitle("Graph Information & Forecasting");
                                 frame4.setResizable(false);
                                 frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new FlowLayout());
-                                frame4.setSize(600, 600);
-                                frame4.setLocationRelativeTo(null);
+                                frame4.setLayout(new BorderLayout());
                                     
-                                mlLabel.setText("Here are the generated existing and forecasted graphs for all regions.");
+                                // Add iterator here and show NHPI info
+                                while(it.hasNext()) {
+                                	mlLabel.setText("Here are the generated existing and forecasted graphs for all regions.");
+                                }
+                                
                                 mlLabel.setFont(selectLabel.getFont().deriveFont(14f));
                                 mlLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                                mlLabel.setPreferredSize(new Dimension(400, 150));
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -441,8 +516,10 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	}
                                 });
                                 
-                                frame4.add(mlLabel);
-                                frame4.add(backButton);
+                                frame4.add(mlLabel, BorderLayout.CENTER);
+                                frame4.add(backButton, BorderLayout.SOUTH);
+                                frame4.pack();
+                                frame4.setLocationRelativeTo(null);
                                 frame4.setVisible(true);
                         	}
                         });
@@ -457,6 +534,8 @@ public class UserInterface extends JFrame implements ActionListener {
                         		con.setMLForecast();
                         		outputs = con.execute();
                         		
+                        		Iterator<String> it = outputs.iterator();
+                        		
                         		frame3.setVisible(false);
                         		
                                 JFrame frame4 = new JFrame();
@@ -466,13 +545,16 @@ public class UserInterface extends JFrame implements ActionListener {
                                 frame4.setTitle("Graph Information & Forecasting");
                                 frame4.setResizable(false);
                                 frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new FlowLayout());
-                                frame4.setSize(600, 600);
-                                frame4.setLocationRelativeTo(null);
+                                frame4.setLayout(new BorderLayout());
                                     
-                                mlLabel.setText("Here are the generated existing and forecasted graphs for all regions.");
+                                // Add iterator here and show NHPI info
+                                while(it.hasNext()) {
+                                	mlLabel.setText("Here are the generated existing and forecasted graphs for all regions.");
+                                }
+                                
                                 mlLabel.setFont(selectLabel.getFont().deriveFont(14f));
                                 mlLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                                mlLabel.setPreferredSize(new Dimension(400, 150));
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -484,9 +566,11 @@ public class UserInterface extends JFrame implements ActionListener {
                                 		frame1.setVisible(true);
                                 	}
                                 });
-
-                                frame4.add(mlLabel);
-                                frame4.add(backButton);
+                                
+                                frame4.add(mlLabel, BorderLayout.CENTER);
+                                frame4.add(backButton, BorderLayout.SOUTH);
+                                frame4.pack();
+                                frame4.setLocationRelativeTo(null);
                                 frame4.setVisible(true);
                         	}
                         });
@@ -513,15 +597,16 @@ public class UserInterface extends JFrame implements ActionListener {
                         frame3.setTitle("Select Graph");
                         frame3.setResizable(false);
                         frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame3.setLayout(new FlowLayout());
-                        frame3.setSize(600, 120);
+                        frame3.setLayout(new BoxLayout(frame3.getContentPane(), BoxLayout.Y_AXIS));
+                        frame3.setSize(400, 145);
                         frame3.setLocationRelativeTo(null);
                 		
-                		graphSelectLabel.setText("Which type of graph would you like to choose?:");
+                		graphSelectLabel.setText("Which type of graph would you like to choose?");
                         graphSelectLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                        graphSelectLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                        graphSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
                         
                         gPanel.setLayout(new FlowLayout());
+                        gPanel.setMaximumSize(new Dimension(400, 50));
                         
                         lineG.setText("Line Graph");
                         lineG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -533,6 +618,7 @@ public class UserInterface extends JFrame implements ActionListener {
                         
                         backButton.setText("Go Back");
                         backButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
                         backButton.addActionListener(new ActionListener() {
                         	@Override
                         	public void actionPerformed(ActionEvent e) {
@@ -564,26 +650,22 @@ public class UserInterface extends JFrame implements ActionListener {
                         		frame3.setVisible(false);
                         		
                                 JFrame frame4 = new JFrame();
-                                
                                 JLabel tLabel = new JLabel();
-                                tLabel.setText("");
-                                
                                 JButton backButton = new JButton();
                                 	
-                                frame4.setTitle("Graph Information & Statistical Test");
+                                frame4.setTitle("Graph Information & NHPI Comparison");
                                 frame4.setResizable(false);
                                 frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new FlowLayout());
-                                frame4.setSize(600, 600);
-                                frame4.setLocationRelativeTo(null);
+                                frame4.setLayout(new BorderLayout());
                                     
-                                // Add iterator here and show StatTest info
+                                // Add iterator here and show NHPI info
                                 while(it.hasNext()) {
-                                	tLabel.setText(tLabel.getText() + it.next());
+                                	tLabel.setText("<html><center>" + tLabel.getText() + it.next() + "</center></html>");
                                 }
                                 
                                 tLabel.setFont(selectLabel.getFont().deriveFont(14f));
                                 tLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                                tLabel.setPreferredSize(new Dimension(400, 150));
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -596,8 +678,10 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	}
                                 });
                                 
-                                frame4.add(tLabel);
-                                frame4.add(backButton);
+                                frame4.add(tLabel, BorderLayout.CENTER);
+                                frame4.add(backButton, BorderLayout.SOUTH);
+                                frame4.pack();
+                                frame4.setLocationRelativeTo(null);
                                 frame4.setVisible(true);
                         	}
                         });
@@ -606,6 +690,7 @@ public class UserInterface extends JFrame implements ActionListener {
                         	@Override
                         	public void actionPerformed(ActionEvent e) {
                         		fc.setCreatorLine();
+                        		
                         		List<String> outputs = new ArrayList<String>();
                         		
                         		con.setStatTest();
@@ -622,17 +707,16 @@ public class UserInterface extends JFrame implements ActionListener {
                                 frame4.setTitle("Graph Information & Statistical Test");
                                 frame4.setResizable(false);
                                 frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new FlowLayout());
-                                frame4.setSize(600, 600);
-                                frame4.setLocationRelativeTo(null);
+                                frame4.setLayout(new BorderLayout());
                                     
-                                // Add iterator here and show StatTest info
+                                // Add iterator here and show NHPI info
                                 while(it.hasNext()) {
-                                	tLabel.setText(tLabel.getText() + it.next());
+                                	tLabel.setText("<html><center>" + tLabel.getText() + it.next() + "</center></html>");
                                 }
                                 
                                 tLabel.setFont(selectLabel.getFont().deriveFont(14f));
                                 tLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                                tLabel.setPreferredSize(new Dimension(400, 150));
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -645,14 +729,22 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	}
                                 });
                                 
-                                frame4.add(tLabel);
-                                frame4.add(backButton);
+                                frame4.add(tLabel, BorderLayout.CENTER);
+                                frame4.add(backButton, BorderLayout.SOUTH);
+                                frame4.pack();
+                                frame4.setLocationRelativeTo(null);
                                 frame4.setVisible(true);
                         	}
                         });
                 	}
                 });
-                operPanel.add(tButton);
+                
+                if (regionsArray.length == 2) {
+                	operPanel.add(tButton);
+                }
+                else {
+                	operPanel.remove(tButton);
+                }
                     
                 nhpiButton.setText("Compare NHPIs");
                 nhpiButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -672,15 +764,16 @@ public class UserInterface extends JFrame implements ActionListener {
                         frame3.setTitle("Select Graph");
                         frame3.setResizable(false);
                         frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame3.setLayout(new FlowLayout());
-                        frame3.setSize(600, 120);
+                        frame3.setLayout(new BoxLayout(frame3.getContentPane(), BoxLayout.Y_AXIS));
+                        frame3.setSize(400, 145);
                         frame3.setLocationRelativeTo(null);
                 		
-                		graphSelectLabel.setText("Which type of graph would you like to choose?:");
+                		graphSelectLabel.setText("Which type of graph would you like to choose?");
                         graphSelectLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                        graphSelectLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                        graphSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
                         
                         gPanel.setLayout(new FlowLayout());
+                        gPanel.setMaximumSize(new Dimension(400, 50));
                         
                         lineG.setText("Line Graph");
                         lineG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -692,6 +785,7 @@ public class UserInterface extends JFrame implements ActionListener {
                         
                         backButton.setText("Go Back");
                         backButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
                         backButton.addActionListener(new ActionListener() {
                         	@Override
                         	public void actionPerformed(ActionEvent e) {
@@ -729,17 +823,16 @@ public class UserInterface extends JFrame implements ActionListener {
                                 frame4.setTitle("Graph Information & NHPI Comparison");
                                 frame4.setResizable(false);
                                 frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new FlowLayout());
-                                frame4.setSize(600, 600);
-                                frame4.setLocationRelativeTo(null);
+                                frame4.setLayout(new BorderLayout());
                                     
                                 // Add iterator here and show NHPI info
                                 while(it.hasNext()) {
-                                	nhpiLabel.setText(nhpiLabel.getText() + it.next());
+                                	nhpiLabel.setText("<html><center>" + nhpiLabel.getText() + it.next() + "</center></html>");
                                 }
                                 
                                 nhpiLabel.setFont(selectLabel.getFont().deriveFont(14f));
                                 nhpiLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                                nhpiLabel.setPreferredSize(new Dimension(400, 150));
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -752,8 +845,10 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	}
                                 });
                                 
-                                frame4.add(nhpiLabel);
-                                frame4.add(backButton);
+                                frame4.add(nhpiLabel, BorderLayout.CENTER);
+                                frame4.add(backButton, BorderLayout.SOUTH);
+                                frame4.pack();
+                                frame4.setLocationRelativeTo(null);
                                 frame4.setVisible(true);
                         	}
                         });
@@ -779,17 +874,16 @@ public class UserInterface extends JFrame implements ActionListener {
                                 frame4.setTitle("Graph Information & NHPI Comparison");
                                 frame4.setResizable(false);
                                 frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new FlowLayout());
-                                frame4.setSize(600, 600);
-                                frame4.setLocationRelativeTo(null);
+                                frame4.setLayout(new BorderLayout());
                                     
                                 // Add iterator here and show NHPI info
                                 while(it.hasNext()) {
-                                	nhpiLabel.setText(nhpiLabel.getText() + it.next());
+                                	nhpiLabel.setText("<html><center>" + nhpiLabel.getText() + it.next() + "</center></html>");
                                 }
                                 
                                 nhpiLabel.setFont(selectLabel.getFont().deriveFont(14f));
                                 nhpiLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                                nhpiLabel.setPreferredSize(new Dimension(400, 150));
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -802,8 +896,10 @@ public class UserInterface extends JFrame implements ActionListener {
                                 	}
                                 });
                                 
-                                frame4.add(nhpiLabel);
-                                frame4.add(backButton);
+                                frame4.add(nhpiLabel, BorderLayout.CENTER);
+                                frame4.add(backButton, BorderLayout.SOUTH);
+                                frame4.pack();
+                                frame4.setLocationRelativeTo(null);
                                 frame4.setVisible(true);
                         	}
                         });
@@ -812,7 +908,8 @@ public class UserInterface extends JFrame implements ActionListener {
                 operPanel.add(nhpiButton);
                 
                 backButton.setText("Go Back");
-                backButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+                backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
                 backButton.addActionListener(new ActionListener() {
                 	@Override
                 	public void actionPerformed(ActionEvent e) {
@@ -820,20 +917,21 @@ public class UserInterface extends JFrame implements ActionListener {
                 		frame1.setVisible(true);
                 	}
                 });
-                    
+                
+                frame2.add(selectLabel);
                 frame2.add(operPanel);
                 frame2.add(backButton);
                 frame2.setVisible(true);
         	}
         	
-        	else if (noError == false) {
+        	else if (noSeriesErrors == false) {
         		frame1.setVisible(false);
         	}
         }
         
         else if (e.getSource() == regionButton) {
 			JLabel label = new JLabel("Region " + newRegionCounter + ":", JLabel.RIGHT);
-			label.setPreferredSize(new Dimension(85, 25));
+			label.setPreferredSize(new Dimension(60, 25));
 			
 			JTextField field = new JTextField();
 			field.setPreferredSize(new Dimension(200, 25));
@@ -845,39 +943,37 @@ public class UserInterface extends JFrame implements ActionListener {
 			newPair.add(label);
 			newPair.add(field);
 			
-			/*
+
 			JButton removeRButton = new JButton();
-			buttonPanel.add(removeRButton);
+            newPair.add(removeRButton);
 			removeRButton.setText("Remove Region " + newRegionCounter);
 			removeRButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+			removeRButton.setPreferredSize(new Dimension(170, 24));
             removeRButton.addActionListener(new ActionListener() {
             	@Override
             	public void actionPerformed(ActionEvent e) {
             		if ((newRegionCounter - 3) == 1) {
             			firstRegionRun = true;
             		}
-            		removeRButton.setVisible(false);
-            		controlPanel2.remove(newPair);
-            		buttonPanel.remove(removeRButton);
             		
             		newRegionCounter -= 1;
+            		
+            		controlPanel2.remove(newPair);
+            		regionsArray = Arrays.copyOf(regionsArray, regionsArray.length - 1);
             		
                     frame1.revalidate();
                     frame1.repaint();
             	}
             });
-            */
 			
 			regionsArray = Arrays.copyOf(regionsArray, regionsArray.length + 1);
 			regionsArray[regionsArray.length - 1] = field;
 			
-			/*
 			if (firstRegionRun == true) {
 				firstRegionRun = false;
 				
-				buttonPanel.add(removeRButton);
+				newPair.add(removeRButton);
 			}
-			*/
 			
 			newRegionCounter += 1;
         }
@@ -889,24 +985,29 @@ public class UserInterface extends JFrame implements ActionListener {
         	}
         	
         	newSeriesCounter += 1;
-			
+        	
+        	JLabel spacer = new JLabel();
+        	spacer.setPreferredSize(new Dimension(1, 20));
+        	
 			JLabel label1 = new JLabel("Start Month 2:", JLabel.RIGHT);
-			label1.setPreferredSize(new Dimension(85, 25));
+			label1.setPreferredSize(new Dimension(80, 25));
 			JLabel label2 = new JLabel("End Month 2:", JLabel.RIGHT);
-			label2.setPreferredSize(new Dimension(85, 25));
+			label2.setPreferredSize(new Dimension(80, 25));
 			JLabel label3 = new JLabel("Start Year 2:", JLabel.RIGHT);
-			label3.setPreferredSize(new Dimension(85, 25));
+			label3.setPreferredSize(new Dimension(80, 25));
 			JLabel label4 = new JLabel("End Year 2:", JLabel.RIGHT);
-			label4.setPreferredSize(new Dimension(85, 25));
+			label4.setPreferredSize(new Dimension(80, 25));
 			
 			JTextField field1 = new JTextField();
-			field1.setPreferredSize(new Dimension(200, 25));
+			field1.setPreferredSize(new Dimension(90, 25));
 			JTextField field2 = new JTextField();
-			field2.setPreferredSize(new Dimension(200, 25));
+			field2.setPreferredSize(new Dimension(90, 25));
 			JTextField field3 = new JTextField();
-			field3.setPreferredSize(new Dimension(200, 25));
+			field3.setPreferredSize(new Dimension(90, 25));
 			JTextField field4 = new JTextField();
-			field4.setPreferredSize(new Dimension(200, 25));
+			field4.setPreferredSize(new Dimension(90, 25));
+			
+			controlPanel1.add(spacer);
 			
 			JPanel newPair1 = new JPanel();
 			newPair1.setLayout(new FlowLayout());
@@ -932,17 +1033,19 @@ public class UserInterface extends JFrame implements ActionListener {
 			newPair4.add(label4);
 			newPair4.add(field4);
 			
-			/*
 			JButton removeSButton = new JButton();
 			removeSButton.setText("Remove Time-Series");
 			removeSButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
             removeSButton.addActionListener(new ActionListener() {
             	@Override
             	public void actionPerformed(ActionEvent e) {
+            		controlPanel1.remove(spacer);
             		controlPanel1.remove(newPair1);
             		controlPanel1.remove(newPair2);
             		controlPanel1.remove(newPair3);
             		controlPanel1.remove(newPair4);
+            		
+            		seriesArray = Arrays.copyOf(seriesArray, seriesArray.length - 1);
             		
             		buttonPanel.remove(removeSButton);
             		buttonPanel.add(seriesButton);
@@ -951,15 +1054,13 @@ public class UserInterface extends JFrame implements ActionListener {
                     frame1.repaint();
             	}
             });
-            */
-			
 			
 			seriesArray = Arrays.copyOf(seriesArray, seriesArray.length + 1);
 			JTextField[] tempArray2 = {field1, field2, field3, field4};
 			seriesArray[seriesArray.length - 1] = tempArray2;
 			
 			buttonPanel.remove(seriesButton);
-			// buttonPanel.add(removeSButton);
+			buttonPanel.add(removeSButton);
         }
         
         frame1.revalidate();

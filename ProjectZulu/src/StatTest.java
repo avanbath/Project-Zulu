@@ -42,10 +42,10 @@ public class StatTest implements Operation {
 		
 		if(l.size()!= 2) {
 			throw new Exception("2 Lists must be provided only.");
-			}
+		}
 		//get the two lists of NHPI's
 		double[]sample1 = fromListToArray (l.get(0).getTable());
-		double[]sample2 =fromListToArray (l.get(1).getTable());
+		double[]sample2 = fromListToArray (l.get(1).getTable());
 		
 		String result = "default";
 		double tscore;
@@ -53,7 +53,7 @@ public class StatTest implements Operation {
 		int df = sample1.length - 1;
 		TTest ttest = new TTest();
 		tscore = ttest.t(sample1, sample2); //This computes the t value
-	    TDistribution t = new TDistribution(df); 
+	    TDistribution t = new TDistribution(df);
 	    critvalue = t.inverseCumulativeProbability(0.95);//Find the critical value given the degrees of freedom
 	    
 	    if(Math.abs(tscore)>Math.abs(critvalue)) {
