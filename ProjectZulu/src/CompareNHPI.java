@@ -42,7 +42,8 @@ public class CompareNHPI implements Operation{
 		double mean,stdDev,max,min,variance;
 		//get information for every list provided
 		for (int i = 0; i<numberOfSamples; i++) {
-			double []sample = fromListToArray (l.get(i).getTable());
+			//double []sample = fromListToArray (l.get(i).getTable());
+			double[] sample = l.get(i).getTable().stream().mapToDouble(Double::doubleValue).toArray();
 			
 			//get statistical information about this current NHPI list
 			mean = StatUtils.mean(sample);
@@ -56,7 +57,6 @@ public class CompareNHPI implements Operation{
 			String loopedresult = ("Sample #"+i+1+") min, max, mean & variance are: "+ min +", " + max + ", "+ String.format("%.2f", mean)+", " + String.format("%.2f", variance) + "\n" + "Standard Deviation: " + String.format("%.2f", stdDev)+"\n");
 			result = result + loopedresult;
 		}
-		
 		return result;
 	}
 	
