@@ -359,7 +359,6 @@ public class UserInterface extends JFrame implements ActionListener {
                 	noSeriesErrors = true;
                 	
                 	con.addTimeSeries(startYear + "-" + startMonth, endYear + "-" + endMonth);
-                	System.out.println("Time Series Added: " + "{" + startYear + "-" + startMonth + ", " + endYear + "-" + endMonth + "}");
                     
                     if (seriesArray.length == 2) {
                     	startMonth = seriesArray[1][0].getText();
@@ -660,14 +659,14 @@ public class UserInterface extends JFrame implements ActionListener {
                                 frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 frame4.setLayout(new BorderLayout());
                                     
-                                // Add iterator here and show NHPI info
+                                // Add iterator here and show StatTest info
                                 while(it.hasNext()) {
                                 	tLabel.setText("<html><center>" + tLabel.getText() + it.next() + "</center></html>");
                                 }
                                 
                                 tLabel.setFont(selectLabel.getFont().deriveFont(14f));
                                 tLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                                tLabel.setPreferredSize(new Dimension(400, 150));
+                                tLabel.setPreferredSize(new Dimension(400, 300));
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -711,14 +710,14 @@ public class UserInterface extends JFrame implements ActionListener {
                                 frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 frame4.setLayout(new BorderLayout());
                                     
-                                // Add iterator here and show NHPI info
+                                // Add iterator here and show StatTest info
                                 while(it.hasNext()) {
                                 	tLabel.setText("<html><center>" + tLabel.getText() + it.next() + "</center></html>");
                                 }
                                 
                                 tLabel.setFont(selectLabel.getFont().deriveFont(14f));
                                 tLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                                tLabel.setPreferredSize(new Dimension(400, 150));
+                                tLabel.setPreferredSize(new Dimension(400, 300));
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -834,7 +833,7 @@ public class UserInterface extends JFrame implements ActionListener {
                                 
                                 nhpiLabel.setFont(selectLabel.getFont().deriveFont(14f));
                                 nhpiLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                                nhpiLabel.setPreferredSize(new Dimension(400, 150));
+                                nhpiLabel.setPreferredSize(new Dimension(400, 300));
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -885,7 +884,7 @@ public class UserInterface extends JFrame implements ActionListener {
                                 
                                 nhpiLabel.setFont(selectLabel.getFont().deriveFont(14f));
                                 nhpiLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                                nhpiLabel.setPreferredSize(new Dimension(400, 150));
+                                nhpiLabel.setPreferredSize(new Dimension(400, 300));
                                 
                                 backButton.setText("Go Back");
                                 backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));

@@ -1,3 +1,5 @@
+// DatabaseAdapter - Latest Version
+
 import java.sql.*;
 
 public class DatabaseAdapter implements Adapter{
@@ -7,7 +9,6 @@ public class DatabaseAdapter implements Adapter{
 	int endYear; 
 	String region1;
 	String region2;
-	
 	
 	public DatabaseAdapter() {
 	}
@@ -21,10 +22,12 @@ public class DatabaseAdapter implements Adapter{
 		this.region2 = region2;
 	}
 	
+	// Connection to the database with supported queries
 	protected ResultSet callDB(String startMonth, String endMonth, int startYear, int endYear, String region) {
     	try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database","root","root");
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM database.location WHERE location = ? AND LENGTH(location) = LENGTH(?) AND ((year = ? AND month >= ?) OR (year > ? AND year < ?) OR (year = ? AND month <= ?)) ORDER BY location, year, month");
+            
             statement.setString(1, region);
             statement.setString(2, region);
             statement.setInt(3, startYear);
@@ -33,7 +36,9 @@ public class DatabaseAdapter implements Adapter{
             statement.setInt(6, endYear);
             statement.setInt(7, endYear);
             statement.setString(8, endMonth);
+            
             ResultSet resultSet = statement.executeQuery();
+            
             return resultSet;
         }
     	
@@ -43,7 +48,8 @@ public class DatabaseAdapter implements Adapter{
     	
 		return null;
     }
-
+	
+	// Connection to the database to get a filled data table with supported queries
 	@Override
 	public DataTable getFilledDataTable(String date1, String date2, String location) {
 		String sy = date1.substring(0, 4);
@@ -55,7 +61,6 @@ public class DatabaseAdapter implements Adapter{
 		
 		try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database","root","root");
-            
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM database.location WHERE location = ? AND LENGTH(location) = LENGTH(?) AND ((year = ? AND month >= ?) OR (year > ? AND year < ?) OR (year = ? AND month <= ?)) ORDER BY location, year, month");
             
             statement.setString(1, location);
@@ -69,14 +74,14 @@ public class DatabaseAdapter implements Adapter{
             statement.setString(8, em);
             
             ResultSet resultSet = statement.executeQuery();
+            
             int count = 1;
             
-            // | YEAR | MONTH | LOCATION | NHPI |
             while (resultSet.next()) { 
             	d.addValue(resultSet.getDouble(4));
+            	
             	count++;
           }
-            //System.out.println("(DATABASE OUTPUT) " + "Region: " + d.getLocation() + ", first NHPI value: " + d.getTable().get(0) + ", second NHPI value: " + d.getTable().get(1));
         }
 		
 		catch (Exception ex) {
