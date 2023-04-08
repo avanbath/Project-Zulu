@@ -1,4 +1,4 @@
-# Project Zulu Software Application Project
+# <p align="center">Project Zulu Software Application Project</p>
 <p align="center">Repository for the Project Zulu software application. This repository is created as the EECS3311 course project at York University.</p>
 
 ![picture](TitlePage.jpg)
