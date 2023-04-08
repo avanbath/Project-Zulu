@@ -1,6 +1,8 @@
 # Project Zulu Software Application Project
 Repository for the Project Zulu software application. This repository is created as the EECS3311 course project at York University.
 
+![picture](TitlePage.jpg)
+
 ##
 Team Name: Zulu
 
