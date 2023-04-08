@@ -4,9 +4,12 @@
 ![picture](TitlePage.jpg)
 
 ##
+
+<p align="center">
 Team Name: Zulu
 
 Team Members: Avaninder Bath | Nikolaos Diamantakis | John Wiens-Soshycki | Luana Ribeiro Madeira
+</p>
 
 ## Version 2.0 Notes
 - JFreeChart, mysql-connector, and Apache Math Commons libraries are already imported and ready to use, so there should be no need to import them manually
