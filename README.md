@@ -3,7 +3,6 @@
 
 ![picture](TitlePage.jpg)
 
-##
 <p align="center"> Team Name: Zulu </p>
 
 <p align="center">Team Members: Avaninder Bath | Nikolaos Diamantakis | John Wiens-Soshycki | Luana Ribeiro Madeira</p>
