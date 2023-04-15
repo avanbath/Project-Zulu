@@ -16,31 +16,7 @@ public class CompareNHPI implements Operation{
 	public void clearTables() {
 		this.l = null;
 	}
-	
-	public  double[] fromListToArray(List<Double> l) {
-		// Iterator class 
-		// Count the elements
-		Iterator<Double> i = l.iterator();
-		int c = 0;
-		
-		while(i.hasNext()) {
-			c++;
-		}
-		
-		// Put the elements in an array
-		double[] a = new double[c];
-		c = 0;
-		i = l.iterator();
-		a[c] = i.next();
-		
-		while (i.hasNext()) {
-			a[c] = i.next();
-			c++;
-		}
-		
-		return a;
-	}
-	
+
 	public String execute() {
 		// Check how many lists of NHPIs have been provided and create that amount of samples
 		int numberOfSamples = l.size();

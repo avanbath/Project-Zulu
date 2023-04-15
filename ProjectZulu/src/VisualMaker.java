@@ -38,7 +38,7 @@ public class VisualMaker implements TableManagerSubscriber, FactoryCommunicator 
 	    frame.setSize(800,367);
 	    
 	    // Loop setup
-	    int counter = 0;
+	    int numOfTimeSeries = 0;
 	    
 	    // Create an iterator for the list of DataTables
 	    Iterator<DataTable> i = l.iterator();
@@ -61,17 +61,17 @@ public class VisualMaker implements TableManagerSubscriber, FactoryCommunicator 
 				sameSeries = new ArrayList<DataTable>();
 				sameSeries.add(current);
 				
-				counter++;
+				numOfTimeSeries++;
 			}
 		}
 		
 		ChartPanel chart = this.creator.create(sameSeries);
 		panel.add(chart);
 		
-		counter++;
+		numOfTimeSeries++;
 		
 		frame.getContentPane().add(scrollBar);
-		frame.setLayout(new GridLayout(1,counter));
+		frame.setLayout(new GridLayout(1,numOfTimeSeries));
 		frame.setVisible(true);
 	}
 }

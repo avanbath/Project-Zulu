@@ -15,7 +15,8 @@ import org.jfree.chart.renderer.category.LayeredBarRenderer;
 public class BarGraphCreator implements GraphCreator{
 	public BarGraphCreator(){
     }
-	
+	//takes a dataset and parses it into a Default CategoryDataset
+	//so that the create method can make a proper bar graph
 	private DefaultCategoryDataset createDataset(List<DataTable> l) {
 		DefaultCategoryDataset dSet = new DefaultCategoryDataset();
 		// Create an iterator for the list of DataTables
@@ -40,21 +41,34 @@ public class BarGraphCreator implements GraphCreator{
 					first = false;
 					date = (dataTable.getStartYear() + yearCount)+(monthCount/12) + "";
 					dSet.addValue(doubleIterator.next(), dataTable.getLocation(), date);
-					
 					yearCount++;
 				}
-				
 				else {
 					doubleIterator.next();
 				}
-				
 				monthCount++;
 			}
 		}
-		
 		return dSet;
 	}
-	
+	//method to reduce the LOC of chartPanel
+	//accepts a LayeredBarRenderer and sets its parameters for the create method
+	private void configRenderer(LayeredBarRenderer lbr){
+		lbr.setSeriesBarWidth(0, 1.0);
+		lbr.setSeriesBarWidth(1, 0.7);
+		lbr.setSeriesBarWidth(2, 0.5);
+		lbr.setItemMargin(0.01);
+	}
+	//method to reduce the LOC of chartPanel
+	//accepts a CategoryAxis and sets its parameters for the create method
+	private void configDomain(CategoryAxis dom){
+		dom.setCategoryMargin(0.25);
+		dom.setUpperMargin(0.05);
+		dom.setLowerMargin(0.05);
+	}
+
+	//Responsible for creating a graph for the given dataset
+	@Override
 	public ChartPanel create(List<DataTable> t) {
 		String title = "NHPI for " + t.get(0).getStartYear() + "-" + t.get(0).getEndYear();
 		CategoryAxis cAxis = new CategoryAxis("Year");
@@ -66,20 +80,15 @@ public class BarGraphCreator implements GraphCreator{
 		JFreeChart barChart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, cPlot, true);
 		
 		LayeredBarRenderer render = (LayeredBarRenderer) cPlot.getRenderer();
-		render.setSeriesBarWidth(0, 1.0);
-        render.setSeriesBarWidth(1, 0.7);
-        render.setSeriesBarWidth(2, 0.5);
-        render.setItemMargin(0.01);
+		configRenderer(render);
 
         CategoryAxis domain = cPlot.getDomainAxis();
-        domain.setCategoryMargin(0.25);
-        domain.setUpperMargin(0.05);
-        domain.setLowerMargin(0.05);
+        configDomain(domain);
         
         ChartPanel panel = new ChartPanel(barChart);
         panel.setSize(new Dimension(800, 367));
         
-        // Return the ChartPanel so that it sends the graph to the UI
+        // Return the ChartPanel so that can be sent into a frame
         return panel;
 	}
 }

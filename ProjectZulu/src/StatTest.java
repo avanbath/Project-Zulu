@@ -17,31 +17,25 @@ public class StatTest implements Operation {
 	public void clearTables() {
 		this.l = null;
 	}
-	
-	public double[] fromListToArray(List<Double> l) {
-		// Iterator class 
-		// Count the elements
-		Iterator<Double> i = l.iterator();
-		int c = 0;
-		
-		while(i.hasNext()) {
-			c++;
+
+	public String getResultString(double tscore, double critvalue){
+      String result="";
+
+		if(Math.abs(tscore) > Math.abs(critvalue)) {
+			result = "The T-score is: " + String.format("%.2f", tscore) + ". The ABS value is greater than the critical value;  a = 0.05 of " + String.format("%.2f", critvalue) + ", so the difference is significant.";
 		}
-		
-		// Put the elements in an array
-		double[] a = new double[c];
-		c = 0;
-		i = l.iterator();
-		a[c] = i.next();
-		
-		while (i.hasNext()) {
-			a[c] = i.next();
-			c++;
+
+		else if (Math.abs(tscore) == 0.00){
+			result = "The T-score is: " + 0 + ". The two samples are identical or almost identical.";
 		}
-		
-		return a;
+
+		else if(Math.abs(tscore) < Math.abs(critvalue)) {
+			result = "The T-score is: " + String.format("%.2f", tscore) + ". The ABS value is lower than the critical value; a = 0.05 of " + String.format("%.2f", critvalue)  + ", so the difference is insignificant.";
+		}
+
+	  return result;
 	}
-	
+
 	// Compute the T-test
 	public String execute() throws Exception {
 		if(l.size()!= 2) {
@@ -50,8 +44,7 @@ public class StatTest implements Operation {
 
 		double[] sample1 = l.get(0).getTable().stream().mapToDouble(Double::doubleValue).toArray();
 		double[] sample2 = l.get(1).getTable().stream().mapToDouble(Double::doubleValue).toArray();
-		
-		String result = "";
+
 		double tscore;
 		double critvalue;
 		int df = sample1.length - 1;
@@ -63,22 +56,8 @@ public class StatTest implements Operation {
 	    
 	    // Find the critical value given the degrees of freedom
 	    critvalue = t.inverseCumulativeProbability(0.95);
-	    
-	    if(Math.abs(tscore) > Math.abs(critvalue)) {
-	    	result = "The T-score is: " + String.format("%.2f", tscore) + ". The ABS value is greater than the critical value;  a = 0.05 of " + String.format("%.2f", critvalue) + ", so the difference is significant.";
-  	    }
-	    
-        else if (Math.abs(tscore) == 0.00){
-        	result = "The T-score is: " + 0 + ". The two samples are identical or almost identical.";
-        }
-	    
-  	    else if(Math.abs(tscore) < Math.abs(critvalue)) {
-  	    	result = "The T-score is: " + String.format("%.2f", tscore) + ". The ABS value is lower than the critical value; a = 0.05 of " + String.format("%.2f", critvalue)  + ", so the difference is insignificant.";
-  	    }
-	    
+		//compute what the result string is
+	    String result = getResultString(tscore,critvalue);
 		return result;
-	}
-	
-	public static void main(String[] args){
 	}
 }
