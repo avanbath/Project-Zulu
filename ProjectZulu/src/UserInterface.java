@@ -222,7 +222,6 @@ public class UserInterface extends JFrame implements ActionListener {
     	Boolean noRegionErrors = false;
     	Boolean noSeriesErrors = false;
     	JDialog prompt = new JDialog();
-    	JLabel invalidLabel = new JLabel();
     	JButton okButton = new JButton();
     	
         okButton.setText("OK");
@@ -245,20 +244,7 @@ public class UserInterface extends JFrame implements ActionListener {
         		if (region.equals(null) || region.equals("") || region.equals(" ")) {
         			noRegionErrors = false;
         			
-        			// Update UI to show error pop-up
-        			prompt.setTitle("Invalid Input");
-        	    	prompt.setResizable(false);
-        	    	prompt.setPreferredSize(new Dimension(300, 100));
-        	    	prompt.setLayout(new FlowLayout());
-        	    	
-        	        invalidLabel.setText("Do not leave any field(s) blank and try again");
-        	        
-        	        prompt.add(invalidLabel);
-        	        prompt.add(okButton);
-        	        prompt.pack();
-        	        prompt.setLocationRelativeTo(null);
-        	        prompt.setAlwaysOnTop(true);
-        	        prompt.setVisible(true);
+        			showErrorPrompt(prompt, "Do not leave any field(s) blank and try again", okButton);
         		}
         		
         		else {
@@ -278,20 +264,7 @@ public class UserInterface extends JFrame implements ActionListener {
                 		if (cityFlag == true) {
                 			noRegionErrors = false;
                 			
-                			// Update UI to show error pop-up
-                			prompt.setTitle("Invalid Input");
-                	    	prompt.setResizable(false);
-                	    	prompt.setPreferredSize(new Dimension(300, 100));
-                	    	prompt.setLayout(new FlowLayout());
-                	    	
-                	        invalidLabel.setText("Enter only provinces or only cities and try again");
-                	        
-                	        prompt.add(invalidLabel);
-                	        prompt.add(okButton);
-                	        prompt.pack();
-                	        prompt.setLocationRelativeTo(null);
-                	        prompt.setAlwaysOnTop(true);
-                	        prompt.setVisible(true);
+                			showErrorPrompt(prompt, "Enter only provinces or only cities and try again", okButton);
                 		}
                 		
                 		else if (cityFlag == false){
@@ -304,21 +277,8 @@ public class UserInterface extends JFrame implements ActionListener {
                 	else if (cityFlag == true) {
                 		if (provinceFlag == true) {
                 			noRegionErrors = false;
-                			
-                			// Update UI to show error pop-up
-                			prompt.setTitle("Invalid Input");
-                	    	prompt.setResizable(false);
-                	    	prompt.setPreferredSize(new Dimension(300, 100));
-                	    	prompt.setLayout(new FlowLayout());
-                	    	
-                	        invalidLabel.setText("Enter only provinces or only cities and try again");
                 	        
-                	        prompt.add(invalidLabel);
-                	        prompt.add(okButton);
-                	        prompt.pack();
-                	        prompt.setLocationRelativeTo(null);
-                	        prompt.setAlwaysOnTop(true);
-                	        prompt.setVisible(true);
+                	        showErrorPrompt(prompt, "Enter only provinces or only cities and try again", okButton);
                 		}
                 		
                 		else if (provinceFlag == false) {
@@ -339,20 +299,7 @@ public class UserInterface extends JFrame implements ActionListener {
                 if (startMonth.equals("") || endMonth.equals("") || startYear.equals("") || endYear.equals("")) {
                 	noSeriesErrors = false;
         			
-        			// Update UI to show error pop-up
-        			prompt.setTitle("Invalid Input");
-        	    	prompt.setResizable(false);
-        	    	prompt.setPreferredSize(new Dimension(300, 100));
-        	    	prompt.setLayout(new FlowLayout());
-        	    	
-        	    	invalidLabel.setText("Do not leave any field(s) blank and try again");
-        	        
-        	        prompt.add(invalidLabel);
-        	        prompt.add(okButton);
-        	        prompt.pack();
-        	        prompt.setLocationRelativeTo(null);
-        	        prompt.setAlwaysOnTop(true);
-        	        prompt.setVisible(true);
+                	showErrorPrompt(prompt, "Do not leave any field(s) blank and try again", okButton);
                 }
                 
                 else {
@@ -369,20 +316,7 @@ public class UserInterface extends JFrame implements ActionListener {
                         if (startMonth.equals("") || endMonth.equals("") || startYear.equals("") || endYear.equals("")) {
                         	noSeriesErrors = false;
                         	
-                			// Update UI to show error pop-up
-                			prompt.setTitle("Invalid Input");
-                	    	prompt.setResizable(false);
-                	    	prompt.setPreferredSize(new Dimension(300, 100));
-                	    	prompt.setLayout(new FlowLayout());
-                	    	
-                	    	invalidLabel.setText("Do not leave any field(s) blank and try again");
-                	        
-                	        prompt.add(invalidLabel);
-                	        prompt.add(okButton);
-                	        prompt.pack();
-                	        prompt.setLocationRelativeTo(null);
-                	        prompt.setAlwaysOnTop(true);
-                	        prompt.setVisible(true);
+                        	showErrorPrompt(prompt, "Do not leave any field(s) blank and try again", okButton);
                         }
                         
                         else {
@@ -398,10 +332,10 @@ public class UserInterface extends JFrame implements ActionListener {
         		
                 JFrame frame2 = new JFrame();
                 JLabel selectLabel = new JLabel();
-                JPanel operPanel = new JPanel();
                 JButton mlButton = new JButton();
                 JButton tButton = new JButton();
                 JButton nhpiButton = new JButton();
+                JPanel operPanel = new JPanel();
                 JButton backButton = new JButton();
                 	
                 frame2.setTitle("Project Zulu - NHPI Comparison & Forecasting");
@@ -415,169 +349,15 @@ public class UserInterface extends JFrame implements ActionListener {
                 selectLabel.setFont(selectLabel.getFont().deriveFont(14f));
                 selectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
                     
-                operPanel.setLayout(new FlowLayout());
-                operPanel.setMaximumSize(new Dimension(250, 105));
-                    
                 mlButton.setText("Generate Forecast Graph");
                 mlButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
                 mlButton.setPreferredSize(new Dimension(250, 25));
                 mlButton.addActionListener(new ActionListener() {
                 	@Override
-                	public void actionPerformed(ActionEvent e) {    		
-                		frame2.setVisible(false);
-                		
-                        JFrame frame3 = new JFrame();
-                        JLabel graphSelectLabel = new JLabel();
-                        JPanel gPanel = new JPanel();
-                        JButton lineG = new JButton();
-                        JButton barG = new JButton();
-                        JButton backButton = new JButton();
-                        
-                        frame3.setTitle("Select Graph");
-                        frame3.setResizable(false);
-                        frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame3.setLayout(new BoxLayout(frame3.getContentPane(), BoxLayout.Y_AXIS));
-                        frame3.setSize(400, 145);
-                        frame3.setLocationRelativeTo(null);
-                		
-                		graphSelectLabel.setText("Which type of graph would you like to choose?");
-                        graphSelectLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                        graphSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-                        
-                        gPanel.setLayout(new FlowLayout());
-                        gPanel.setMaximumSize(new Dimension(400, 50));
-                        
-                        lineG.setText("Line Graph");
-                        lineG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                        barG.setText("Bar Graph");
-                        barG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                        
-                        gPanel.add(lineG);
-                        gPanel.add(barG);
-                        
-                        backButton.setText("Go Back");
-                        backButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-                        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-                        backButton.addActionListener(new ActionListener() {
-                        	@Override
-                        	public void actionPerformed(ActionEvent e) {
-                        		frame3.dispose();
-                        		con.resetData();
-                        		frame1.setVisible(true);
-                        	}
-                        });
-                		
-                        frame3.add(graphSelectLabel);
-                        frame3.add(gPanel);
-                        frame3.add(backButton);
-                        
-                        frame3.setVisible(true);
-                        
-                        // barG, lineG add action event handlers to show graph
-                        barG.addActionListener(new ActionListener() {
-                        	@Override
-                        	public void actionPerformed(ActionEvent e) {
-                        		fc.setCreatorBar();
-                        		
-                        		List<String> outputs = new ArrayList<String>();
-                        		
-                        		con.setMLForecast();
-                        		outputs = con.execute();
-                        		
-                        		Iterator<String> it = outputs.iterator();
-                        		
-                        		frame3.setVisible(false);
-                        		
-                                JFrame frame4 = new JFrame();
-                                JLabel mlLabel = new JLabel();
-                                JButton backButton = new JButton();
-                                	
-                                frame4.setTitle("Graph Information & Forecasting");
-                                frame4.setResizable(false);
-                                frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new BorderLayout());
-                                    
-                                // Add iterator here and show NHPI info
-                                while(it.hasNext()) {
-                                	mlLabel.setText("Here are the generated existing and forecasted graphs for all regions.");
-                                }
-                                
-                                mlLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                                mlLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                                mlLabel.setPreferredSize(new Dimension(400, 150));
-                                
-                                backButton.setText("Go Back");
-                                backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                backButton.addActionListener(new ActionListener() {
-                                	@Override
-                                	public void actionPerformed(ActionEvent e) {
-                                		frame4.dispose();
-                                		con.resetData();
-                                		frame1.setVisible(true);
-                                	}
-                                });
-                                
-                                frame4.add(mlLabel, BorderLayout.CENTER);
-                                frame4.add(backButton, BorderLayout.SOUTH);
-                                frame4.pack();
-                                frame4.setLocationRelativeTo(null);
-                                frame4.setVisible(true);
-                        	}
-                        });
-                        
-                        lineG.addActionListener(new ActionListener() {
-                        	@Override
-                        	public void actionPerformed(ActionEvent e) {
-                        		fc.setCreatorLine();
-                        		
-                        		List<String> outputs = new ArrayList<String>();
-                        		
-                        		con.setMLForecast();
-                        		outputs = con.execute();
-                        		
-                        		Iterator<String> it = outputs.iterator();
-                        		
-                        		frame3.setVisible(false);
-                        		
-                                JFrame frame4 = new JFrame();
-                                JLabel mlLabel = new JLabel();
-                                JButton backButton = new JButton();
-                                	
-                                frame4.setTitle("Graph Information & Forecasting");
-                                frame4.setResizable(false);
-                                frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new BorderLayout());
-                                    
-                                // Add iterator here and show NHPI info
-                                while(it.hasNext()) {
-                                	mlLabel.setText("Here are the generated existing and forecasted graphs for all regions.");
-                                }
-                                
-                                mlLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                                mlLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                                mlLabel.setPreferredSize(new Dimension(400, 150));
-                                
-                                backButton.setText("Go Back");
-                                backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                backButton.addActionListener(new ActionListener() {
-                                	@Override
-                                	public void actionPerformed(ActionEvent e) {
-                                		frame4.dispose();
-                                		con.resetData();
-                                		frame1.setVisible(true);
-                                	}
-                                });
-                                
-                                frame4.add(mlLabel, BorderLayout.CENTER);
-                                frame4.add(backButton, BorderLayout.SOUTH);
-                                frame4.pack();
-                                frame4.setLocationRelativeTo(null);
-                                frame4.setVisible(true);
-                        	}
-                        });
+                	public void actionPerformed(ActionEvent e) {
+                		showGraphSelect(frame2, mlButton.getText());
                 	}
                 });
-                operPanel.add(mlButton);
                     
                 tButton.setText("Show Statistical T-Test");
                 tButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -585,160 +365,25 @@ public class UserInterface extends JFrame implements ActionListener {
                 tButton.addActionListener(this);
                 tButton.addActionListener(new ActionListener() {
                 	@Override
-                	public void actionPerformed(ActionEvent e) {    		
-                		frame2.setVisible(false);
-                		
-                        JFrame frame3 = new JFrame();
-                        JLabel graphSelectLabel = new JLabel();
-                        JPanel gPanel = new JPanel();
-                        JButton lineG = new JButton();
-                        JButton barG = new JButton();
-                        JButton backButton = new JButton();
-                        
-                        frame3.setTitle("Select Graph");
-                        frame3.setResizable(false);
-                        frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame3.setLayout(new BoxLayout(frame3.getContentPane(), BoxLayout.Y_AXIS));
-                        frame3.setSize(400, 145);
-                        frame3.setLocationRelativeTo(null);
-                		
-                		graphSelectLabel.setText("Which type of graph would you like to choose?");
-                        graphSelectLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                        graphSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-                        
-                        gPanel.setLayout(new FlowLayout());
-                        gPanel.setMaximumSize(new Dimension(400, 50));
-                        
-                        lineG.setText("Line Graph");
-                        lineG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                        barG.setText("Bar Graph");
-                        barG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                        
-                        gPanel.add(lineG);
-                        gPanel.add(barG);
-                        
-                        backButton.setText("Go Back");
-                        backButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-                        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-                        backButton.addActionListener(new ActionListener() {
-                        	@Override
-                        	public void actionPerformed(ActionEvent e) {
-                        		frame3.dispose();
-                        		con.resetData();
-                        		frame1.setVisible(true);
-                        	}
-                        });
-                		
-                        frame3.add(graphSelectLabel);
-                        frame3.add(gPanel);
-                        frame3.add(backButton);
-                        
-                        frame3.setVisible(true);
-                        
-                        // barG, lineG add action event handlers to show graph
-                        barG.addActionListener(new ActionListener() {
-                        	@Override
-                        	public void actionPerformed(ActionEvent e) {
-                        		fc.setCreatorBar();
-                        		
-                        		List<String> outputs = new ArrayList<String>();
-                        		
-                        		con.setStatTest();
-                        		outputs = con.execute();
-                        		
-                        		Iterator<String> it = outputs.iterator();
-                        		
-                        		frame3.setVisible(false);
-                        		
-                                JFrame frame4 = new JFrame();
-                                JLabel tLabel = new JLabel();
-                                JButton backButton = new JButton();
-                                	
-                                frame4.setTitle("Graph Information & NHPI Comparison");
-                                frame4.setResizable(false);
-                                frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new BorderLayout());
-                                    
-                                // Add iterator here and show StatTest info
-                                while(it.hasNext()) {
-                                	tLabel.setText("<html><center>" + tLabel.getText() + it.next() + "</center></html>");
-                                }
-                                
-                                tLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                                tLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                                tLabel.setPreferredSize(new Dimension(400, 300));
-                                
-                                backButton.setText("Go Back");
-                                backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                backButton.addActionListener(new ActionListener() {
-                                	@Override
-                                	public void actionPerformed(ActionEvent e) {
-                                		frame4.dispose();
-                                		con.resetData();
-                                		frame1.setVisible(true);
-                                	}
-                                });
-                                
-                                frame4.add(tLabel, BorderLayout.CENTER);
-                                frame4.add(backButton, BorderLayout.SOUTH);
-                                frame4.pack();
-                                frame4.setLocationRelativeTo(null);
-                                frame4.setVisible(true);
-                        	}
-                        });
-                        
-                        lineG.addActionListener(new ActionListener() {
-                        	@Override
-                        	public void actionPerformed(ActionEvent e) {
-                        		fc.setCreatorLine();
-                        		
-                        		List<String> outputs = new ArrayList<String>();
-                        		
-                        		con.setStatTest();
-                        		outputs = con.execute();
-                        		
-                        		Iterator<String> it = outputs.iterator();
-                        		
-                        		frame3.setVisible(false);
-                        		
-                                JFrame frame4 = new JFrame();
-                                JLabel tLabel = new JLabel();
-                                JButton backButton = new JButton();
-                                	
-                                frame4.setTitle("Graph Information & Statistical Test");
-                                frame4.setResizable(false);
-                                frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new BorderLayout());
-                                    
-                                // Add iterator here and show StatTest info
-                                while(it.hasNext()) {
-                                	tLabel.setText("<html><center>" + tLabel.getText() + it.next() + "</center></html>");
-                                }
-                                
-                                tLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                                tLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                                tLabel.setPreferredSize(new Dimension(400, 300));
-                                
-                                backButton.setText("Go Back");
-                                backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                backButton.addActionListener(new ActionListener() {
-                                	@Override
-                                	public void actionPerformed(ActionEvent e) {
-                                		frame4.dispose();
-                                		con.resetData();
-                                		frame1.setVisible(true);
-                                	}
-                                });
-                                
-                                frame4.add(tLabel, BorderLayout.CENTER);
-                                frame4.add(backButton, BorderLayout.SOUTH);
-                                frame4.pack();
-                                frame4.setLocationRelativeTo(null);
-                                frame4.setVisible(true);
-                        	}
-                        });
+                	public void actionPerformed(ActionEvent e) {
+                		showGraphSelect(frame2, tButton.getText());
                 	}
                 });
+                    
+                nhpiButton.setText("Compare NHPIs");
+                nhpiButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+                nhpiButton.setPreferredSize(new Dimension(250, 25));
+                nhpiButton.addActionListener(new ActionListener() {
+                	@Override
+                	public void actionPerformed(ActionEvent e) {
+                		showGraphSelect(frame2, nhpiButton.getText());
+                	}
+                });
+                
+                operPanel.setLayout(new FlowLayout());
+                operPanel.setMaximumSize(new Dimension(250, 105));
+                
+                operPanel.add(mlButton);
                 
                 if (regionsArray.length == 2) {
                 	operPanel.add(tButton);
@@ -746,166 +391,7 @@ public class UserInterface extends JFrame implements ActionListener {
                 else {
                 	operPanel.remove(tButton);
                 }
-                    
-                nhpiButton.setText("Compare NHPIs");
-                nhpiButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                nhpiButton.setPreferredSize(new Dimension(250, 25));
-                nhpiButton.addActionListener(new ActionListener() {
-                	@Override
-                	public void actionPerformed(ActionEvent e) {    		
-                		frame2.setVisible(false);
-                		
-                        JFrame frame3 = new JFrame();
-                        JLabel graphSelectLabel = new JLabel();
-                        JPanel gPanel = new JPanel();
-                        JButton lineG = new JButton();
-                        JButton barG = new JButton();
-                        JButton backButton = new JButton();
-                        
-                        frame3.setTitle("Select Graph");
-                        frame3.setResizable(false);
-                        frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame3.setLayout(new BoxLayout(frame3.getContentPane(), BoxLayout.Y_AXIS));
-                        frame3.setSize(400, 145);
-                        frame3.setLocationRelativeTo(null);
-                		
-                		graphSelectLabel.setText("Which type of graph would you like to choose?");
-                        graphSelectLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                        graphSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-                        
-                        gPanel.setLayout(new FlowLayout());
-                        gPanel.setMaximumSize(new Dimension(400, 50));
-                        
-                        lineG.setText("Line Graph");
-                        lineG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                        barG.setText("Bar Graph");
-                        barG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                        
-                        gPanel.add(lineG);
-                        gPanel.add(barG);
-                        
-                        backButton.setText("Go Back");
-                        backButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-                        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-                        backButton.addActionListener(new ActionListener() {
-                        	@Override
-                        	public void actionPerformed(ActionEvent e) {
-                        		frame3.dispose();
-                        		con.resetData();
-                        		frame1.setVisible(true);
-                        	}
-                        });
-                		
-                        frame3.add(graphSelectLabel);
-                        frame3.add(gPanel);
-                        frame3.add(backButton);
-                        
-                        frame3.setVisible(true);
-                        
-                        // barG, lineG add action event handlers to show graph
-                        barG.addActionListener(new ActionListener() {
-                        	@Override
-                        	public void actionPerformed(ActionEvent e) {
-                        		fc.setCreatorBar();
-                        		
-                        		List<String> outputs = new ArrayList<String>();
-                        		
-                        		con.setCompareNHPI();
-                        		outputs = con.execute();
-                        		
-                        		Iterator<String> it = outputs.iterator();
-                        		
-                        		frame3.setVisible(false);
-                        		
-                                JFrame frame4 = new JFrame();
-                                JLabel nhpiLabel = new JLabel();
-                                JButton backButton = new JButton();
-                                	
-                                frame4.setTitle("Graph Information & NHPI Comparison");
-                                frame4.setResizable(false);
-                                frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new BorderLayout());
-                                    
-                                // Add iterator here and show NHPI info
-                                while(it.hasNext()) {
-                                	nhpiLabel.setText("<html><center>" + nhpiLabel.getText() + it.next() + "</center></html>");
-                                }
-                                
-                                nhpiLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                                nhpiLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                                nhpiLabel.setPreferredSize(new Dimension(400, 300));
-                                
-                                backButton.setText("Go Back");
-                                backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                backButton.addActionListener(new ActionListener() {
-                                	@Override
-                                	public void actionPerformed(ActionEvent e) {
-                                		frame4.dispose();
-                                		con.resetData();
-                                		frame1.setVisible(true);
-                                	}
-                                });
-                                
-                                frame4.add(nhpiLabel, BorderLayout.CENTER);
-                                frame4.add(backButton, BorderLayout.SOUTH);
-                                frame4.pack();
-                                frame4.setLocationRelativeTo(null);
-                                frame4.setVisible(true);
-                        	}
-                        });
-                        
-                        lineG.addActionListener(new ActionListener() {
-                        	@Override
-                        	public void actionPerformed(ActionEvent e) {
-                        		fc.setCreatorLine();
-                        		
-                        		List<String> outputs = new ArrayList<String>();
-                        		
-                        		con.setCompareNHPI();
-                        		outputs = con.execute();
-                        		
-                        		Iterator<String> it = outputs.iterator();
-                        		
-                        		frame3.setVisible(false);
-                        		
-                                JFrame frame4 = new JFrame();
-                                JLabel nhpiLabel = new JLabel();
-                                JButton backButton = new JButton();
-                                	
-                                frame4.setTitle("Graph Information & NHPI Comparison");
-                                frame4.setResizable(false);
-                                frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame4.setLayout(new BorderLayout());
-                                    
-                                // Add iterator here and show NHPI info
-                                while(it.hasNext()) {
-                                	nhpiLabel.setText("<html><center>" + nhpiLabel.getText() + it.next() + "</center></html>");
-                                }
-                                
-                                nhpiLabel.setFont(selectLabel.getFont().deriveFont(14f));
-                                nhpiLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                                nhpiLabel.setPreferredSize(new Dimension(400, 300));
-                                
-                                backButton.setText("Go Back");
-                                backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                                backButton.addActionListener(new ActionListener() {
-                                	@Override
-                                	public void actionPerformed(ActionEvent e) {
-                                		frame4.dispose();
-                                		con.resetData();
-                                		frame1.setVisible(true);
-                                	}
-                                });
-                                
-                                frame4.add(nhpiLabel, BorderLayout.CENTER);
-                                frame4.add(backButton, BorderLayout.SOUTH);
-                                frame4.pack();
-                                frame4.setLocationRelativeTo(null);
-                                frame4.setVisible(true);
-                        	}
-                        });
-                	}
-                });
+                
                 operPanel.add(nhpiButton);
                 
                 backButton.setText("Go Back");
@@ -1066,6 +552,166 @@ public class UserInterface extends JFrame implements ActionListener {
         
         frame1.revalidate();
         frame1.repaint();
+    }
+    
+    public void showErrorPrompt(JDialog prompt, String labelText, JButton okButton) {
+		// Update UI to show invalid input pop-up depending on error situation
+    	JLabel invalidLabel = new JLabel(labelText);
+    	
+		prompt.setTitle("Invalid Input");
+    	prompt.setResizable(false);
+    	prompt.setPreferredSize(new Dimension(300, 100));
+    	prompt.setLayout(new FlowLayout()); 
+    	
+    	invalidLabel.setText(labelText);
+    	
+        prompt.add(invalidLabel);
+        prompt.add(okButton);
+        prompt.pack();
+        prompt.setLocationRelativeTo(null);
+        prompt.setAlwaysOnTop(true);
+        prompt.setVisible(true);
+    }
+    
+    public void showGraphSelect(JFrame frame2, String operation) {
+		frame2.setVisible(false);
+		
+        JFrame frame3 = new JFrame();
+        JLabel graphSelectLabel = new JLabel();
+        JPanel gPanel = new JPanel();
+        JButton lineG = new JButton();
+		JButton barG = new JButton();
+        JButton backButton = new JButton();
+        
+        frame3.setTitle("Select Graph");
+        frame3.setResizable(false);
+        frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame3.setLayout(new BoxLayout(frame3.getContentPane(), BoxLayout.Y_AXIS));
+        frame3.setSize(400, 145);
+        frame3.setLocationRelativeTo(null);
+		
+		graphSelectLabel.setText("Which type of graph would you like to choose?");
+        graphSelectLabel.setFont(graphSelectLabel.getFont().deriveFont(14f));
+        graphSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        gPanel.setLayout(new FlowLayout());
+        gPanel.setMaximumSize(new Dimension(400, 50));
+        
+        lineG.setText("Line Graph");
+        lineG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        barG.setText("Bar Graph");
+        barG.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        
+        gPanel.add(lineG);
+        gPanel.add(barG);
+        
+        backButton.setText("Go Back");
+        backButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backButton.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		frame3.dispose();
+        		con.resetData();
+        		frame1.setVisible(true);
+        	}
+        });
+		
+        frame3.add(graphSelectLabel);
+        frame3.add(gPanel);
+        frame3.add(backButton);
+        
+        frame3.setVisible(true);
+        
+        // barG, lineG add action event handlers to show graph
+        barG.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		setFinalDisplay(frame3, operation, barG.getText());
+        	}
+        });
+        
+        lineG.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		setFinalDisplay(frame3, operation, lineG.getText());
+        	}
+        });
+    }
+    
+    public void setFinalDisplay(JFrame prevFrame, String operation, String buttonText) {	
+    	if (buttonText.equals("Bar Graph")) {
+			fc.setCreatorBar();
+		}
+		
+		else {
+			fc.setCreatorLine();
+		}
+    	
+    	JFrame frame4 = new JFrame();
+    	JLabel label = new JLabel();
+    	JButton backButton = new JButton();
+    	
+        frame4.setResizable(false);
+        frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame4.setLayout(new BorderLayout());
+        
+        label.setFont(label.getFont().deriveFont(14f));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        backButton.setText("Go Back");
+        backButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        backButton.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		frame4.dispose();
+        		con.resetData();
+        		frame1.setVisible(true);
+        	}
+        });
+    	
+		List<String> outputs = new ArrayList<String>();
+		
+    	if (operation.equals("Generate Forecast Graph")) {
+    		frame4.setTitle("Graph Information & Forecasting");
+    		label.setPreferredSize(new Dimension(400, 150));
+    		con.setMLForecast();
+    	}
+    	
+    	else if (operation.equals("Show Statistical T-Test")) {
+    		frame4.setTitle("Graph Information & Statistical Test");
+    		label.setPreferredSize(new Dimension(400, 300));
+    		con.setStatTest();
+    	}
+    	
+    	else if (operation.equals("Compare NHPIs")) {
+    		frame4.setTitle("Graph Information & NHPI Comparison");
+    		label.setPreferredSize(new Dimension(400, 300));
+    		con.setCompareNHPI();
+    	}
+    	
+		outputs = con.execute();
+		
+		Iterator<String> it = outputs.iterator();
+        
+        // Add iterator here and show NHPI info depending on operation
+		if (operation.equals("Generate Forecast Graph")) {
+	        label.setText("Here are the generated existing and forecasted graphs for all regions.");
+		}
+		
+		else {
+			while (it.hasNext()) {
+				label.setText("<html><center>" + label.getText() + it.next() + "</center></html>");
+			}
+		}
+        
+		prevFrame.setVisible(false);
+		
+        frame4.add(label, BorderLayout.CENTER);
+        frame4.add(backButton, BorderLayout.SOUTH);
+        frame4.pack();
+        frame4.setLocationRelativeTo(null);
+        frame4.setVisible(true);
     }
     
     public void setFC(FactoryCommunicator f) {
