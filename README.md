@@ -1,5 +1,5 @@
 # <p align="center">Project Zulu Software Application Project</p>
-<p align="center">Repository for the Project Zulu software application. This repository was originally created for the EECS3311 coursee at York University, but has been extended for the addition and improvement of the features/design.</p>
+<p align="center">Repository for the Project Zulu software application. This repository was originally created for the EECS3311 course at the Lassonde School of Engineering (York University), but has been extended for the addition and improvement of the features/design.</p>
 
 <p align="center"><img src="TitlePage.jpg"></p>
 
